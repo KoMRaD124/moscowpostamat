@@ -1,0 +1,10 @@
+@import "src/styles/vars";
+.body{
+    display: flex;
+    background-color: #D5DDE9;
+    min-height: 100vh;
+}
+.content{
+    width: 100%;
+    margin-left: 240px;
+}

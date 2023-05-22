@@ -1,0 +1,20 @@
+@import "src/styles/vars";
+.body {
+  width: 240px;
+  height: 100vh;
+  background-color: $color-black;
+  color: $color-black-nonactive;
+  font-family: "TT Firs Neue";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  position: fixed;
+}
+.content{
+    margin: 28px 8px;
+}
+.logo{
+  padding-left: 12px;
+}
