@@ -6,7 +6,7 @@ export const SideBar = () => {
   return (
     <div className={styles.body}>
       <div className={styles.content}>
-        <img className={styles.logo} src={logoWhite} alt="" srcset="" />
+        <img className={styles.logo} src={logoWhite} alt="" srcSet="" />
         <LeftMenu/>
       </div>
     </div>

@@ -2,10 +2,11 @@ import React from "react";
 import styles from "./UserCard.module.scss";
 import { ReactComponent as Delete } from "../../../../assets/img/Delete.svg";
 import classNames from "classnames";
+import { DeleteScreen } from "../AccessScreens/DeleteScreen/DeleteScreen";
 
-export const UserCard = ({ name, email,id }) => {
+export const UserCard = ({ name, email, id,role }) => {
   const [isHovered, setIsHovered] = React.useState(false);
-
+  const [isDel, setIsDel] = React.useState(true);
   const handleHover = () => {
     setIsHovered(true);
   };
@@ -14,25 +15,33 @@ export const UserCard = ({ name, email,id }) => {
     setIsHovered(false);
   };
   return (
-    <div className={styles.body}>
-      <div className={styles.info}>
-        <div className={styles.block}>
-          <div className={styles.name}>Имя</div>
-          <div className={styles.subname}>{name}</div>
+    <>
+      <div className={styles.body}>
+        <div className={styles.info}>
+          <div className={styles.block}>
+            <div className={styles.name}>Имя</div>
+            <div className={styles.subname}>{name}</div>
+          </div>
+          <div className={styles.block}>
+            <div className={styles.name}>Почта</div>
+            <div className={styles.subname}>{email}</div>
+          </div>
         </div>
-        <div className={styles.block}>
-          <div className={styles.name}>Почта</div>
-          <div className={styles.subname}>{email}</div>
+        <div
+          onMouseEnter={handleHover}
+          onMouseLeave={handleLeave}
+          onClick={() => setIsDel(false)}
+          className={styles.button}
+        >
+          <Delete
+            className={classNames({
+              [styles.delBtn]: !isHovered,
+              [styles.delBtnHover]: isHovered,
+            })}
+          />
         </div>
       </div>
-      <div
-        onMouseEnter={handleHover}
-        onMouseLeave={handleLeave}
-        onClick={() => console.log()}
-        className={styles.button}
-      >
-        <Delete className={classNames({ [styles.delBtn]: !isHovered,[styles.delBtnHover]:isHovered })} />
-      </div>
-    </div>
+      {isDel?<></>:<DeleteScreen active={isDel} setIsDel={setIsDel} id={id} email={email} role={role}/>}
+    </>
   );
 };

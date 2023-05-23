@@ -5,9 +5,9 @@ import { Header } from "../../components/Admin/Header/Header";
 import { Route, Routes } from "react-router-dom";
 import { navRoutes } from "../../routes/navRoutes";
 
-export const AdminPage = () => {
 
-  return (
+export const AdminPage = () => {
+    return (
     <div className={styles.body}>
       <SideBar />
       <div className={styles.content}>

@@ -10,10 +10,19 @@
   padding: 17px 38px;
   border-radius: 8px;
 }
-.redButton{
-    background-color: $color-red;
-    color: $color-white;
-    &:hover{
-        background-color: $color-red-hover;
-    }
+.redButton {
+  background-color: $color-red;
+  color: $color-white;
+  &:hover {
+    background-color: $color-red-hover;
+  }
+}
+.whiteButton {
+  border: 3px solid $color-red;
+  background-color: $color-white;
+  padding: 14px 35px;
+  color: $color-red;
+  &:hover{
+    background-color: $color-white-hover;
+  }
 }

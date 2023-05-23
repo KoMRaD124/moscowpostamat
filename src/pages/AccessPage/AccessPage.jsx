@@ -10,13 +10,14 @@ import { setUsers } from "../../store/usersSlise";
 export const AccessPage = () => {
   const dispatch = useDispatch();
   const usersData = useSelector((state) => state.users.users);
-  const [data, setData] = React.useState([]);
+  const adminArray=  usersData.filter((el)=>el.role!=="user")
+  const userArray=  usersData.filter((el)=>el.role==="user")
   const getUsers = () => {
     axios
       .get("https://msk-postamat.ru/api/admin/users")
       .then((response) => {
         dispatch(setUsers(response.data));
-        setData(response.data);
+
         console.log(response.data);
       })
       .catch((error) => {
@@ -24,29 +25,30 @@ export const AccessPage = () => {
       });
   };
   React.useEffect(() => getUsers, []);
-  console.log(usersData);
   return (
     <div className={styles.body}>
       <AcessHead />
       <Divider />
       <h1 className={styles.h1}>Администрация</h1>
       <div className={styles.dataArray}>
-        {data.map((el) => (
+        {adminArray.map((el) => (
           <UserCard
             name={el.name}
             email={el.email}
             id={el.id}
+            role={"администратора"}
             key={el.id + el.name}
           />
         ))}
       </div>
       <h1 className={styles.h1}>Пользователи</h1>
       <div className={styles.dataArray}>
-        {data.map((el) => (
+        {userArray.map((el) => (
           <UserCard
             name={el.name}
             email={el.email}
             id={el.id}
+            role={"пользователя"}
             key={el.id + el.name}
           />
         ))}

@@ -7,13 +7,16 @@ const authSlise=createSlice({
     },
     reducers:{
         setUsers(state,action){
-            state.users.push({...action.payload})
+            state.users=action.payload
             console.log(state.users);
         },
-        deleteUser(state){
-            
+        addUser(state,action){
+            state.users.push(action.payload);
+        },
+        deleteUser(state,action){
+            state.users=state.users.filter((user)=>user.id!==action.payload)
         }
     }
 });
-export const {setUsers,logOutUser}=authSlise.actions
+export const {setUsers,deleteUser,addUser}=authSlise.actions
 export default authSlise.reducer
