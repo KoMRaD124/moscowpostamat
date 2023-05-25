@@ -6,11 +6,11 @@ export class SearchStore {
     }
     tasks=[]
     reviews=[]
-    setTasks(data){
+    setTasks= (data) =>{
         this.tasks=data
         console.log(this.tasks);
     }
-    setReviews(data){
+    setReviews = (data) => {
         this.reviews=data
         console.log(this.reviews);
     }

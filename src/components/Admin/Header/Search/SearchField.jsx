@@ -8,21 +8,22 @@ import { searchStore } from "../../../../mobxStore/store";
 
 
 export const SearchField = observer(() => {
-    const{setReviews,setTasks,tasks,reviews}=searchStore;
+    /* const{setReviews,setTasks,tasks,reviews}=searchStore; */
     const [searchValue, setSearchValue]=React.useState("")
     const searchFetch = () => {
      
-       axios.get(`${domain}/api/admin/reviews?search=${searchValue}`)
-       .then((response)=>setReviews(response.data))
+       axios.get(`${domain}/api/admin/reviews?search=москва`)
+       .then((response)=>{searchStore.reviews = response.data})
+       
        
        .catch((error) => {
         console.log(error);
       });
-       /* axios.get(`${domain}/api/admin/tasks/${searchValue}`)
-       .then((response)=>setTasks(response.data))
+       axios.get(`${domain}/api/admin/tasks/${searchValue}`)
+       .then((response)=>searchStore.tasks=response.data)
        .catch((error) => {
         console.log(error);
-      }); */
+      });
         
     };
   return (
