@@ -5,13 +5,14 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setAuth } from "../../../../../store/authSlise";
 import axios from "axios";
+import { domain } from "../../../../../constants/config";
 
 export const ExitScreen = ({active, setIsExit}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const logOutButton = () => {
     axios
-      .post("https://msk-postamat.ru/api/admin/logout")
+      .post(`${domain}/api/admin/logout`)
       .then((response) => {
         dispatch(
           setAuth({

@@ -6,6 +6,7 @@ import { LoginPage } from "./pages/LoginPage/LoginPage";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setAuth } from "./store/authSlise";
+import { domain } from "./constants/config";
 /* import AuthRedirect from "./hoc/AuthRedirect"; */
 
 axios.defaults.withCredentials = true;
@@ -15,11 +16,11 @@ function App() {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .post("https://msk-postamat.ru/api/admin/auth")
+      .post(`${domain}/api/admin/auth`)
       .then((response) => {
         dispatch(setAuth(response.data));
         console.log(response.data);
-        navigate("/home");
+        /* navigate("/*"); */
       })
       .catch((error) => {
         navigate("/login", { replace: true });

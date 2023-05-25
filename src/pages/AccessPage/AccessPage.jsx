@@ -6,6 +6,7 @@ import { UserCard } from "../../components/Admin/Access/UserCard/UserCard";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setUsers } from "../../store/usersSlise";
+import { domain } from "../../constants/config";
 
 export const AccessPage = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ export const AccessPage = () => {
   const userArray=  usersData.filter((el)=>el.role==="user")
   const getUsers = () => {
     axios
-      .get("https://msk-postamat.ru/api/admin/users")
+      .get(`${domain}/api/admin/users`)
       .then((response) => {
         dispatch(setUsers(response.data));
 
@@ -24,14 +25,14 @@ export const AccessPage = () => {
         console.log("запрос пользователей " + error);
       });
   };
-  React.useEffect(() => getUsers, []);
+  React.useEffect(() => getUsers(), []);
   return (
     <div className={styles.body}>
       <AcessHead />
       <Divider />
       <h1 className={styles.h1}>Администрация</h1>
       <div className={styles.dataArray}>
-        {adminArray.map((el) => (
+        {adminArray.length===0?<div className={styles.emptyArray}>Отсутствуют пользователи с этой ролью</div>:adminArray.map((el) => (
           <UserCard
             name={el.name}
             email={el.email}
@@ -43,7 +44,7 @@ export const AccessPage = () => {
       </div>
       <h1 className={styles.h1}>Пользователи</h1>
       <div className={styles.dataArray}>
-        {userArray.map((el) => (
+        {userArray.length===0?<div className={styles.emptyArray}>Отсутствуют пользователи с этой ролью</div>:userArray.map((el) => (
           <UserCard
             name={el.name}
             email={el.email}

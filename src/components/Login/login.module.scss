@@ -12,8 +12,8 @@
 .login {
   padding-top: 40px;
 }
-.password{
-    padding-top: 16px;
+.password {
+  padding-top: 16px;
 }
 .inputText {
   font-family: "TT Firs Neue";
@@ -24,6 +24,21 @@
   letter-spacing: 0.01em;
   color: $color-black;
 }
-.button{
-    padding-top: 37px;
+.button {
+  /* padding-top: 37px; */
+}
+.buttonContainer{
+  padding-top: 37px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.pasText {
+  font-family: "TT Firs Neue";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 26px;
+  letter-spacing: 0.01em;
+  color: #f73619;
 }

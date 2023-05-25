@@ -5,7 +5,7 @@ import { Plus } from "../../../../assets/img";
 import { AddUser } from "../AddUser/AddUser";
 
 export const AcessHead = () => {
-  const userRoot = useSelector((state) => state.auth.root);
+  const userRoot = useSelector((state) => state.auth.role);
   const [user, setUser]=React.useState(false)
   const [admin, setadmin]=React.useState(false)
   return (
@@ -16,7 +16,7 @@ export const AcessHead = () => {
           <img src={Plus} alt="" srcSet="" />
           <p className={styles.btnText}>Добавить Пользователя</p>
         </button>
-        {userRoot === "root" ? (
+        {userRoot ==="root" ? (
           <></>
         ) : (
           <button className={styles.button} onClick={()=>setadmin(true)}>

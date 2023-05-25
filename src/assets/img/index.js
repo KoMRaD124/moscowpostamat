@@ -13,5 +13,5 @@ import main from "./main.svg"
 import Tasks from "./Tasks.svg"
 import Plus from "./Plus.svg"
 import Delete from "./Delete.svg"
-
-export{loaderWhiteSvg,loaderRedSvg,loginPageBG,logoRed,showPass,dontShowPass,logoWhite,Access,Analytics,comments,Logout,main,Tasks,Plus,Delete}
+import Arrow from "./Arrow.svg"
+export{loaderWhiteSvg,loaderRedSvg,loginPageBG,logoRed,showPass,dontShowPass,logoWhite,Access,Analytics,comments,Logout,main,Tasks,Plus,Delete,Arrow}

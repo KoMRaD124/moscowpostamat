@@ -8,7 +8,7 @@ export const Header = () => {
 
   return (
     <>
-      <div onClick={() => setIsExit(false)} className={styles.body}>
+      <div  className={styles.body}>
         <div className={styles.button}>
           <img src={Logout} alt="Кнопка выхода" srcSet="" />
           <p className={styles.buttonText}>Выход</p>

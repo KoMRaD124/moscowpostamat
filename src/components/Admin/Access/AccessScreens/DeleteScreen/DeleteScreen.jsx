@@ -3,16 +3,16 @@ import styles from "./DeleteScreen.module.scss";
 import { MyButton } from "../../../../common/Button/MyButton";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setAuth } from "../../../../../store/authSlise";
+
 import axios from "axios";
 import { deleteUser } from "../../../../../store/usersSlise";
+import { domain } from "../../../../../constants/config";
 
 export const DeleteScreen = ({active, setIsDel,role,id,email}) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const delUser = () => {
     axios
-      .delete(`https://msk-postamat.ru/api/admin/users/${id}`)
+      .delete(`${domain}/api/admin/users/${id}`)
       .then((response) => {
         dispatch(
           deleteUser(id)

@@ -5,6 +5,7 @@ import { Input } from "../../../common/Input/Input";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { addUser } from "../../../../store/usersSlise";
+import { domain } from "../../../../constants/config";
 
 export const AddUser = ({ role, roleName, isActive }) => {
   const [login, setLogin] = React.useState("");
@@ -19,7 +20,7 @@ export const AddUser = ({ role, roleName, isActive }) => {
   const sendData = () => {
     console.log(data);
     axios
-      .post("https://msk-postamat.ru/api/admin/users", data)
+      .post(`${domain}/api/admin/users`, data)
       .then((response) => {
         dispatch(addUser(data));
         isActive(false);
@@ -36,6 +37,7 @@ export const AddUser = ({ role, roleName, isActive }) => {
           <h2 className={styles.header}>Добавление {roleName}</h2>
           <div className={styles.inputs}>
             <Input
+              
               placeholder={"Введите имя"}
               type="text"
               onChange={(e) => setLogin(e.target.value)}
@@ -51,7 +53,7 @@ export const AddUser = ({ role, roleName, isActive }) => {
             почту
           </div>
           <div className={styles.buttons}>
-            <MyButton onClick={() => sendData()} redButton>
+            <MyButton onClick={() => sendData()} redButton disabled={!(login && email)}>
               Добавить
             </MyButton>
             <MyButton whiteButton onClick={() => isActive(false)}>

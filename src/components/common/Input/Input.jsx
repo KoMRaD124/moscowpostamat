@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./Input.module.scss"
 import { dontShowPass, showPass } from "../../../assets/img";
-export const Input = ({ type, placeholder, value, onChange }) => {
+import classNames from "classnames";
+export const Input = ({ type, placeholder, value, onChange,isError }) => {
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleTogglePassword = () => {
@@ -10,7 +11,7 @@ export const Input = ({ type, placeholder, value, onChange }) => {
 
   return (
     <div style={{ position: 'relative', with:"100%"}}>
-    <input className={styles.input}
+    <input className={classNames(styles.input,{[styles.isError]:isError})}
       type={showPassword ? 'text' : type}
       placeholder={placeholder}
       value={value}
@@ -30,9 +31,9 @@ export const Input = ({ type, placeholder, value, onChange }) => {
       }}
     >
       {showPassword ? (
-        <img src={showPass} alt="пароль скрыт" /> // иконка при скрытом пароле
+        <img src={showPass} alt="пароль скрыт" /> 
       ) : (
-        <img src={dontShowPass} alt="пароль показан" /> // иконка при показанном пароле
+        <img src={dontShowPass} alt="пароль показан" />
       )}
     </button>
     )}
