@@ -12,7 +12,7 @@ export const Header = () => {
     <>
       <div  className={styles.body}>
         <SearchField/>
-        <div className={styles.button}>
+        <div className={styles.button} onClick={()=>setIsExit(false)}>
           <img src={Logout} alt="Кнопка выхода" srcSet="" />
           <p className={styles.buttonText}>Выход</p>
         </div>

@@ -4,8 +4,10 @@ import { observer } from "mobx-react-lite";
 import { searchStore } from "../../../../../mobxStore/store";
 import { Divider } from "../../../../common/Divider/Divider";
 import { Arrow } from "../../../../../assets/img";
+import { CommentCard } from "./CommentCard/CommentCard";
 export const SearchResult = observer(() => {
   const { setReviews, setTasks, tasks, reviews } = searchStore;
+
   return (
     <div className={styles.body}>
       <header className={styles.header}>
@@ -14,8 +16,13 @@ export const SearchResult = observer(() => {
       </header>
       <div className={styles.divider}></div>
       <div className={styles.subHead}>Комментарии</div>
-      <button className={styles.subHeadText}><p>Посмотреть все комментарии ({})</p>  <img src={Arrow} alt="" srcset="" /></button>
-
+      <button className={styles.subHeadText}>
+        <p>Посмотреть все комментарии ({})</p>{" "}
+        <img src={Arrow} alt="" srcset="" />
+      </button>
+      <div className={styles.cardBlock}>
+        <CommentCard />
+      </div>
     </div>
   );
 });

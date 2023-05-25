@@ -1,0 +1,11 @@
+@import "src/styles/vars";
+.body {
+  width: 636px;
+  height: 77px;
+  background: #f5f6f8;
+  border-radius: 8px;
+  &:hover{
+    background: #EAEEF4;
+  }
+}
+
