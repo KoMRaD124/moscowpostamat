@@ -14,4 +14,5 @@ import Tasks from "./Tasks.svg"
 import Plus from "./Plus.svg"
 import Delete from "./Delete.svg"
 import Arrow from "./Arrow.svg"
-export{loaderWhiteSvg,loaderRedSvg,loginPageBG,logoRed,showPass,dontShowPass,logoWhite,Access,Analytics,comments,Logout,main,Tasks,Plus,Delete,Arrow}
+import searchButton from "./searchButton.svg"
+export{loaderWhiteSvg,loaderRedSvg,loginPageBG,logoRed,showPass,dontShowPass,logoWhite,Access,Analytics,comments,Logout,main,Tasks,Plus,Delete,Arrow,searchButton}
