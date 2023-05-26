@@ -107,8 +107,8 @@ export const MainPage = () => {
           <div className={styles.taskInProgress}>
             <div className={styles.taskHead}>Задачи в работе</div>
             <div className={styles.tasks}>
-             <TaskCard type={inProgressTask[0].name} date={inProgressTask[0].created_at.substr(0, 5)} address={inProgressTask[0].review.address} id={inProgressTask[0].id}/>
-              <TaskCard type={inProgressTask[1].name} date={inProgressTask[1].created_at.substr(0, 5)} address={inProgressTask[1].review.address} id={inProgressTask[1].id}/> 
+             <TaskCard type={inProgressTask[0].name} date={inProgressTask[0].created_at.substr(0, 5)} address={inProgressTask[0].review.postamat_address} id={inProgressTask[0].id}/>
+              <TaskCard type={inProgressTask[1].name} date={inProgressTask[1].created_at.substr(0, 5)} address={inProgressTask[1].review.postamat_address} id={inProgressTask[1].id}/> 
   
             </div>
             <button className={styles.tasksShowAll}>
@@ -120,7 +120,7 @@ export const MainPage = () => {
           <div className={styles.openTask}>
             <div className={styles.taskHead}>Задачи требуют решения</div>
             <div className={styles.tasksIsOpen}>
-                {openTaskArray.map((el)=>(<TaskCard type={el.name} date={el.created_at.substr(0, 5)} address={el.review.address} id={el.id}/>))}
+                {openTaskArray.map((el)=>(<TaskCard type={el.name} date={el.created_at.substr(0, 5)} address={el.review.postamat_address} id={el.id}/>))}
             </div>
             <button className={styles.tasksShowAll}>
               Все задачи, требующие решения <img src={Arrow} alt="" />

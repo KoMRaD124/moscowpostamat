@@ -6,27 +6,31 @@ import { domain } from "../../../../constants/config";
 import { observer } from "mobx-react-lite";
 import { searchStore } from "../../../../mobxStore/store";
 import { SearchResult } from "./SearchResult/SearchResult";
+import { useNavigate } from "react-router-dom";
 
 export const SearchField = observer(() => {
-  const [isActive, setIsActive] = React.useState(true);
+  /* const [isActive, setIsActive] = React.useState(true); */
+  const navigate= useNavigate()
   const [searchValue, setSearchValue] = React.useState("");
   const searchFetch = () => {
     axios
       .get(`${domain}/api/admin/reviews?search=${searchValue}`)
       .then((response) => {
         searchStore.reviews = response.data;
-        console.log(response.data);
-        setIsActive(true);
+        navigate("/search", { replace: true });
+        searchStore.setIsActive(true)
+        /* setIsActive(true); */
       })
 
       .catch((error) => {
         console.log(error);
       });
     axios
-      .get(`${domain}/api/admin/tasks/${searchValue}`)
+      .get(`${domain}/api/admin/tasks?search=${searchValue}`)
       .then((response) => {
         searchStore.tasks = response.data;
-        setIsActive(true);
+        navigate("/search", { replace: true });
+        searchStore.setIsActive(true)
       })
 
       .catch((error) => {
@@ -57,7 +61,7 @@ export const SearchField = observer(() => {
           <img src={searchButton} alt="" />
         </button>
       </div>
-      {isActive?<></>:<SearchResult setIsActive={setIsActive} searchValue={searchValue}/>}
+      {/* {isActive?<></>:<SearchResult setIsActive={setIsActive} searchValue={searchValue}/>} */}
     </>
     /*  <div style={{ position: "relative", with: "100%" }}>
       <input

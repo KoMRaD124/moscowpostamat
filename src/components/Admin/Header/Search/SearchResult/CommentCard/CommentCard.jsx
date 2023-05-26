@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./CommentCard.module.scss";
-export const CommentCard = ({ rating, types, adress, id, date }) => {
+export const CommentCard = ({ rating, types, address, id, date }) => {
   return (
     <div className={styles.body}>
       <div className={styles.rating}>{rating}</div>
@@ -11,7 +11,7 @@ export const CommentCard = ({ rating, types, adress, id, date }) => {
           ))}
         </div>
 
-        <div className={styles.adress}>{adress}</div>
+        <div className={styles.adress}>{address}</div>
       </div>
       <div className={styles.number}>
         <div className={styles.id}>{id}</div>
