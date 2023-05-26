@@ -1,4 +1,4 @@
-let domain = "https://msk-postamat.ru"
+let domain = "https://msk-postamat.online"
 
 
 export {domain}

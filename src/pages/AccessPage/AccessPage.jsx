@@ -7,12 +7,22 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setUsers } from "../../store/usersSlise";
 import { domain } from "../../constants/config";
+import { SuccesfullModal } from "../../components/Admin/Access/AccessScreens/Modal/SuccesfullModal";
+import { ErrorModal } from "../../components/Admin/Access/AccessScreens/Modal/Error";
+import { UserDel } from "../../components/Admin/Access/AccessScreens/Modal/userDel";
+
 
 export const AccessPage = () => {
+
+  const successIsActive=useSelector((state)=>state.users.SuccesfullisActive)
+  const ErrorisActive=useSelector((state)=>state.users.ErrorisActive)
+  const UserDelete=useSelector((state)=>state.users.UserDel)
+  const delEmail=useSelector((state)=>state.users.delEmail)
   const dispatch = useDispatch();
   const usersData = useSelector((state) => state.users.users);
-  const adminArray=  usersData.filter((el)=>el.role!=="user")
+  const adminArray=  usersData.filter((el)=>el.role==="admin")
   const userArray=  usersData.filter((el)=>el.role==="user")
+
   const getUsers = () => {
     axios
       .get(`${domain}/api/admin/users`)
@@ -54,6 +64,9 @@ export const AccessPage = () => {
           />
         ))}
       </div>
+      {successIsActive?<SuccesfullModal/>:<></>}
+      {ErrorisActive?<ErrorModal/>:<></>}
+      {UserDelete?<UserDel email={delEmail}/>:<></>}
     </div>
   );
 };

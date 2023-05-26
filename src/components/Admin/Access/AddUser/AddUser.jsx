@@ -4,10 +4,12 @@ import { MyButton } from "../../../common/Button/MyButton";
 import { Input } from "../../../common/Input/Input";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { addUser } from "../../../../store/usersSlise";
+import { addUser, openError } from "../../../../store/usersSlise";
 import { domain } from "../../../../constants/config";
+import { SuccesfullModal } from "../AccessScreens/Modal/SuccesfullModal";
 
 export const AddUser = ({ role, roleName, isActive }) => {
+  /* const [successIsActive, setSuccessIsActive]=React.useState(false) */
   const [login, setLogin] = React.useState("");
   const [email, setEmail] = React.useState("");
   const dispatch = useDispatch();
@@ -23,10 +25,13 @@ export const AddUser = ({ role, roleName, isActive }) => {
       .post(`${domain}/api/admin/users`, data)
       .then((response) => {
         dispatch(addUser(data));
+
+        /* setSuccessIsActive(true) */
         isActive(false);
       })
       .catch((error) => {
         console.error(error);
+        dispatch(openError())
         isActive(false);
       });
   };
@@ -62,6 +67,8 @@ export const AddUser = ({ role, roleName, isActive }) => {
           </div>
         </div>
       </div>
+      {/* {successIsActive?<SuccesfullModal isActive={setSuccessIsActive}/>:<></>} */}
+
     </div>
   );
 };

@@ -5,21 +5,23 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
-import { deleteUser } from "../../../../../store/usersSlise";
+import { deleteUser, openError } from "../../../../../store/usersSlise";
 import { domain } from "../../../../../constants/config";
 
 export const DeleteScreen = ({active, setIsDel,role,id,email}) => {
+  
   const dispatch = useDispatch();
   const delUser = () => {
     axios
       .delete(`${domain}/api/admin/users/${id}`)
       .then((response) => {
         dispatch(
-          deleteUser(id)
+          deleteUser(id={id}, email={email})
         );
       })
       .catch((error) => {
         console.log(error);
+        dispatch(openError())
       });
       setIsDel(true)
   };

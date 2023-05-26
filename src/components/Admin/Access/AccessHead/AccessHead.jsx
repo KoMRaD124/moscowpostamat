@@ -5,29 +5,40 @@ import { Plus } from "../../../../assets/img";
 import { AddUser } from "../AddUser/AddUser";
 
 export const AcessHead = () => {
-  const userRoot = useSelector((state) => state.auth.role);
-  const [user, setUser]=React.useState(false)
-  const [admin, setadmin]=React.useState(false)
+  const userRoot = useSelector((state) => state.auth.auth.role);
+  const [user, setUser] = React.useState(false);
+  const [admin, setadmin] = React.useState(false);
   return (
     <>
       <h1 className={styles.header}>Доступы</h1>
       <div className={styles.head}>
-        <button className={styles.button} onClick={()=>setUser(true)}>
+        <button className={styles.button} onClick={() => setUser(true)}>
           <img src={Plus} alt="" srcSet="" />
-          <p className={styles.btnText}>Добавить Пользователя</p>
+          <p className={styles.btnText}>Добавить пользователя</p>
         </button>
-        {userRoot ==="root" ? (
-          <></>
+        {userRoot === "root" ? (
+          <button className={styles.button} onClick={() => setadmin(true)}>
+          <img src={Plus} alt="" srcSet="" />
+          <p className={styles.btnText}>Добавить администратора</p>
+        </button>
         ) : (
-          <button className={styles.button} onClick={()=>setadmin(true)}>
-
-            <img src={Plus} alt="" srcSet="" />
-            <p className={styles.btnText}>Добавить Администратора</p>
-          </button>
+          <></>
         )}
       </div>
-      {user?<AddUser isActive={setUser} role={"user"} roleName={"пользователя"}/>:<></>}
-      {admin?<AddUser isActive={setadmin} role={"admin"} roleName={"администратора"}/>:<></>}
+      {user ? (
+        <AddUser isActive={setUser} role={"user"} roleName={"пользователя"} />
+      ) : (
+        <></>
+      )}
+      {admin ? (
+        <AddUser
+          isActive={setadmin}
+          role={"admin"}
+          roleName={"администратора"}
+        />
+      ) : (
+        <></>
+      )}
     </>
   );
 };
