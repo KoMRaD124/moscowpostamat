@@ -12,15 +12,19 @@ export const FilterPostamat = observer((props: {
     useEffect(() => {
         postamatStore.fetchRegions()
         postamatStore.fetchDistricts()
+        postamatStore.fetchPostamats()
     }, [])
 
     const isReady =
         postamatStore.regions &&
-        postamatStore.districts
+        postamatStore.districts &&
+        postamatStore.postamats
 
     const renderSelectRegion = () => {
         return (
-            <div className={styles.selectDistrictGrid}>
+            <div className={classNames(styles.selectDistrictGrid, {
+                [styles.disabled]: postamatStore.selectedPostamat
+            })}>
                 <div>
                     <div className={styles.colHeader}>Округ</div>
                     <div className={styles.groupsCol}>
@@ -66,15 +70,15 @@ export const FilterPostamat = observer((props: {
                                     {value.map((region: any) =>
                                         <button
                                             className={styles.groupItem}
-                                            onClick={() => postamatStore.toggleRegion(region.id)}
+                                            onClick={() => postamatStore.toggleDistrict(region.id)}
                                         >
                                             <div
                                                 className={classNames(styles.checkbox, {
-                                                    [styles.checked]: postamatStore.isRegionSelected(region.id)
+                                                    [styles.checked]: postamatStore.isDistrictSelected(region.id)
                                                 })}
                                             />
                                             <div className={classNames(styles.groupItemText, {
-                                                [styles.checked]: postamatStore.isRegionSelected(region.id)
+                                                [styles.checked]: postamatStore.isDistrictSelected(region.id)
                                             })}>
                                                 {region.name}
                                             </div>
@@ -100,8 +104,37 @@ export const FilterPostamat = observer((props: {
                 <div className={styles.divider}/>
                 <div className={styles.searchRow}>
                     <div className={styles.inputWrapper}>
-                        <input className={styles.input} placeholder={"ул. Мосфильмовская, д. 8, Москва"}/>
+                        <input
+                            value={postamatStore.selectedPostamat?.address ?? postamatStore.searchValue}
+                            onChange={(event) => postamatStore.searchValue = event.target.value}
+                            className={styles.input}
+                            placeholder={"ул. Мосфильмовская, д. 8, Москва"}
+                            disabled={!!postamatStore.selectedPostamat}
+                        />
                         <img src={searchIcon} className={styles.searchIcon}/>
+                        {postamatStore.selectedPostamat &&
+                            <button
+                                className={styles.clearSearch}
+                                onClick={() => postamatStore.selectedPostamat = undefined}
+                            >
+                                <img src={xMark}/>
+                            </button>
+                        }
+                        {(postamatStore.searchValue.length > 0 && (postamatStore.searchOptions?.length ?? 0) > 0) &&
+                            <div className={styles.searchOptions}>
+                                {postamatStore.searchOptions?.map(p =>
+                                    <button
+                                        className={styles.searchOption}
+                                        onClick={() => {
+                                            postamatStore.selectedPostamat = p
+                                            postamatStore.searchValue = ""
+                                        }}
+                                    >
+                                        {p.address}
+                                    </button>
+                                )}
+                            </div>
+                        }
                     </div>
                     <button
                         className={styles.selectAllButton}

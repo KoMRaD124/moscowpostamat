@@ -7,6 +7,8 @@ import jsPDF from 'jspdf';
 import html2canvas from "html2canvas";
 import {Select} from "../../components/common/Select/Select";
 import {FilterPostamat} from "../../components/analytics/FilterPostamat/FilterPostamat";
+import chevronIcon from "../../assets/img/select/chevron.svg"
+import xMark from "../../assets/img/Xmark.svg"
 
 const COLORS = ['#30FF6B', '#FFE586', '#FF4D4D'];
 
@@ -39,6 +41,7 @@ export const AnalyticsPage = observer(() => {
     }, [analyticsStore.period])
 
     const [isFilterPostamatOpen, setIsFilterPostamatOpen] = useState(false)
+    const [isAppliedSettingsCardExpanded, setIsAppliedSettingsCardExpanded] = useState(true)
 
     const componentRef = useRef(null);
     const handleDownloadImage = async () => {
@@ -47,7 +50,7 @@ export const AnalyticsPage = observer(() => {
         const data = canvas.toDataURL('image/png', 1);
         const pdf = new jsPDF();
         pdf.addImage(data, 'PNG', 10, 10, 197, 250);
-        pdf.save("Анилитика.pdf");
+        pdf.save("Аналитика.pdf");
     };
 
     const getTopRow = () => {
@@ -184,7 +187,9 @@ export const AnalyticsPage = observer(() => {
                 <div className={styles.reviewCategoriesCard}>
                     <div>
                         <BarChart width={612} height={231} data={analyticsStore.appliedReviewCategories}>
-                            <Tooltip/>
+                            <Tooltip cursor={{fill: "#EAEEF4"}} contentStyle={{color: "#2F3342"}}
+                                     itemStyle={{color: "#9DA1AE"}}
+                            />
                             <XAxis dataKey="name" hide={true}/>
                             <Bar dataKey="count" fill="#8884d8" barSize={53} name={"Количество"}>
                                 {analyticsStore.appliedReviewCategories?.map((entry, index) => (
@@ -230,7 +235,9 @@ export const AnalyticsPage = observer(() => {
                 <div className={styles.reviewCategoriesCard} style={{height: "288px"}}>
                     <div>
                         <BarChart width={612} height={164} data={analyticsStore.appliedTaskCategories}>
-                            <Tooltip/>
+                            <Tooltip cursor={{fill: "#EAEEF4"}} contentStyle={{color: "#2F3342"}}
+                                     itemStyle={{color: "#9DA1AE"}}
+                            />
                             <XAxis dataKey="name" hide={true}/>
                             <Bar dataKey="count" fill="#8884d8" barSize={65} name={"Количество"}>
                                 {analyticsStore.appliedTaskCategories?.map((entry, index) => (
@@ -278,6 +285,40 @@ export const AnalyticsPage = observer(() => {
                         <div className={styles.header}>Аналитика</div>
                         {getTopRow()}
                         <div className={styles.divider}/>
+                        {analyticsStore.appliedSettingsCount > 0 &&
+                            <div className={styles.appliedSettingsCard}>
+                                <div className={styles.header}>
+                                    Выбранные настройки{" "}
+                                    <span className={styles.count}>
+                                        ({analyticsStore.appliedSettingsCount})
+                                    </span>
+                                </div>
+                                <button
+                                    className={styles.expandButton}
+                                    style={{
+                                        transform: `rotate(${isAppliedSettingsCardExpanded ? 0 : 180}deg)`
+                                    }}
+                                    onClick={() => setIsAppliedSettingsCardExpanded(!isAppliedSettingsCardExpanded)}
+                                >
+                                    <img src={chevronIcon}/>
+                                </button>
+                                {isAppliedSettingsCardExpanded &&
+                                    <div className={styles.chips}>
+                                        {analyticsStore.period !== "all" &&
+                                            <div className={styles.chip}>
+                                                Период: {periodOptions.find(
+                                                    p => p.value === analyticsStore.period)?.name?.toLowerCase()
+                                                }
+                                                <button className={styles.clearButton}
+                                                        onClick={() => analyticsStore.period = "all"}>
+                                                    <img src={xMark}/>
+                                                </button>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        }
                         <div id={"charts"} ref={componentRef} style={{position: "relative"}}>
                             {getRatingCharts()}
                             {getReviewsCategoriesChart()}

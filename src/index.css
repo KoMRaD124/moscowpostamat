@@ -21,6 +21,7 @@ code {
 body {
   overflow: overlay;
   background: white !important;
+  color: #2F3342;
 }
 
 a {
@@ -33,6 +34,7 @@ button {
   border: none;
   cursor: pointer;
   background: none;
+  color: #2F3342;
 }
 
 button:disabled {

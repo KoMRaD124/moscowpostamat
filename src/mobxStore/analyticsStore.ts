@@ -108,6 +108,14 @@ class AnalyticsStore {
             Math.round(data.count / totalCount * 100)
         )
     }
+
+    get appliedSettingsCount() {
+        let count = 0
+        if (this.period !== "all") {
+            count++
+        }
+        return count
+    }
 }
 
 export const analyticsStore = new AnalyticsStore()
