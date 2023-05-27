@@ -1,6 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import axios from "axios";
 import {domain} from "../constants/config";
+import {postamatStore} from "./postamatStore";
 
 class AnalyticsStore {
     constructor() {
@@ -47,10 +48,36 @@ class AnalyticsStore {
         ]
     }
 
+    get ratingSeriesFormatted() {
+        const index = this.period === "week" ? 2 : this.period === "month" ? 2 : 3;
+        return this.ratingSeries?.map(s => ({
+            period: s.period.split(".").slice(0, index).join("."),
+            avg_rating: s.avg_rating
+        })) ?? []
+    }
+
     async fetchRatingCountData() {
-        const req1 = axios.get(`${domain}/api/admin/reviews?limit=1&min_rating=1&max_rating=2&period=${this.period}`)
-        const req2 = axios.get(`${domain}/api/admin/reviews?limit=1&rating=3&period=${this.period}`)
-        const req3 = axios.get(`${domain}/api/admin/reviews?limit=1&min_rating=4&max_rating=5&period=${this.period}`)
+        let q1 = `${domain}/api/admin/reviews?limit=1&min_rating=1&max_rating=2&period=${this.period}`
+        let q2 = `${domain}/api/admin/reviews?limit=1&rating=3&period=${this.period}`
+        let q3 = `${domain}/api/admin/reviews?limit=1&min_rating=4&max_rating=5&period=${this.period}`
+
+        if (postamatStore.selectedPostamat) {
+            const q = `&postamat_id=${postamatStore.selectedPostamat.id}`
+            q1 += q
+            q2 += q
+            q3 += q
+        }
+
+        if (postamatStore.selectedDistrictIds.length) {
+            const q = `&district_ids=${postamatStore.selectedDistrictIds.join(",")}`
+            q1 += q
+            q2 += q
+            q3 += q
+        }
+
+        const req1 = axios.get(q1)
+        const req2 = axios.get(q2)
+        const req3 = axios.get(q3)
         const responses = await axios.all([req1, req2, req3])
         this.ratingCount = {
             rating12: responses[0].data.total_count,
@@ -60,12 +87,26 @@ class AnalyticsStore {
     }
 
     async fetchAvgRating() {
-        const res = await axios.get(`${domain}/api/admin/reviews/avg-rating?period=${this.period}`)
+        let q = `${domain}/api/admin/reviews/avg-rating?period=${this.period}`;
+        if (postamatStore.selectedPostamat) {
+            q += `&postamat_id=${postamatStore.selectedPostamat.id}`
+        }
+        if (postamatStore.selectedDistrictIds.length) {
+            q += `&district_ids=${postamatStore.selectedDistrictIds.join(",")}`
+        }
+        const res = await axios.get(q)
         this.avgRating = res.data.year_avg;
     }
 
     async fetchRatingSeries() {
-        const res = await axios.get(`${domain}/api/admin/reviews/avg-rating-series?period=${this.period}`)
+        let q = `${domain}/api/admin/reviews/avg-rating-series?period=${this.period}`
+        if (postamatStore.selectedPostamat) {
+            q += `&postamat_id=${postamatStore.selectedPostamat.id}`
+        }
+        if (postamatStore.selectedDistrictIds.length) {
+            q += `&district_ids=${postamatStore.selectedDistrictIds.join(",")}`
+        }
+        const res = await axios.get(q)
         this.ratingSeries = res.data;
 
         const parseDate = (dateStr: string) => {
@@ -78,20 +119,32 @@ class AnalyticsStore {
             const d2 = parseDate(b.period)
             return d1 < d2 ? -1 : d1 > d2 ? 1 : 0;
         })
-
-        this.ratingSeries = this.ratingSeries?.map(s => ({
-            period: s.period.split(".").slice(0, 2).join("."),
-            avg_rating: s.avg_rating
-        })) ?? []
     }
 
     async fetchAppliedReviewCategories() {
-        const res = await axios.get(`${domain}/api/admin/review-categories/applied-count?period=${this.period}`)
+        let q = `${domain}/api/admin/review-categories/applied-count?period=${this.period}`
+        if (postamatStore.selectedPostamat) {
+            q += `&postamat_id=${postamatStore.selectedPostamat.id}`
+        }
+        if (postamatStore.selectedDistrictIds.length) {
+            q += `&district_ids=${postamatStore.selectedDistrictIds.join(",")}`
+        }
+        const res = await axios.get(q)
         this.appliedReviewCategories = res.data;
     }
 
     async fetchAppliedTaskCategories() {
-        const res = await axios.get(`${domain}/api/admin/task-categories/applied-count?period=${this.period}`)
+        let q = `${domain}/api/admin/task-categories/applied-count?period=${this.period}`
+        if (postamatStore.selectedPostamat) {
+            q += `&postamat_id=${postamatStore.selectedPostamat.id}`
+        }
+        if (postamatStore.selectedRegionIds.length) {
+            q += `&region_ids=${postamatStore.selectedRegionIds.join(",")}`
+        }
+        if (postamatStore.selectedDistrictIds.length) {
+            q += `&district_ids=${postamatStore.selectedDistrictIds.join(",")}`
+        }
+        const res = await axios.get(q)
         this.appliedTaskCategories = res.data;
     }
 
@@ -113,6 +166,11 @@ class AnalyticsStore {
         let count = 0
         if (this.period !== "all") {
             count++
+        }
+        if (postamatStore.selectedPostamat) {
+            count++
+        } else {
+            count += postamatStore.selectedDistrictIds.length
         }
         return count
     }

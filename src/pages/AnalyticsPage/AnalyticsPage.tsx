@@ -9,6 +9,7 @@ import {Select} from "../../components/common/Select/Select";
 import {FilterPostamat} from "../../components/analytics/FilterPostamat/FilterPostamat";
 import chevronIcon from "../../assets/img/select/chevron.svg"
 import xMark from "../../assets/img/Xmark.svg"
+import {postamatStore} from "../../mobxStore/postamatStore";
 
 const COLORS = ['#30FF6B', '#FFE586', '#FF4D4D'];
 
@@ -38,10 +39,15 @@ export const AnalyticsPage = observer(() => {
         analyticsStore.fetchRatingSeries()
         analyticsStore.fetchAppliedReviewCategories()
         analyticsStore.fetchAppliedTaskCategories()
-    }, [analyticsStore.period])
+    }, [
+        analyticsStore.period,
+        postamatStore.selectedPostamat,
+        postamatStore.selectedRegionIds.length,
+        postamatStore.selectedDistrictIds.length
+    ])
 
     const [isFilterPostamatOpen, setIsFilterPostamatOpen] = useState(false)
-    const [isAppliedSettingsCardExpanded, setIsAppliedSettingsCardExpanded] = useState(true)
+    const [isAppliedSettingsCardExpanded, setIsAppliedSettingsCardExpanded] = useState(false)
 
     const componentRef = useRef(null);
     const handleDownloadImage = async () => {
@@ -150,7 +156,7 @@ export const AnalyticsPage = observer(() => {
                         <LineChart
                             width={370}
                             height={246}
-                            data={analyticsStore.ratingSeries ?? []}
+                            data={analyticsStore.ratingSeriesFormatted ?? []}
                             margin={{
                                 left: -40,
                                 right: 40
@@ -165,7 +171,7 @@ export const AnalyticsPage = observer(() => {
                                 dataKey="avg_rating"
                                 stroke="#FF1935"
                                 strokeWidth={3}
-                                dot={{r: 8}}
+                                dot={{r: 6}}
                                 name={"Средняя оценка"}
                             />
                         </LineChart>
@@ -287,7 +293,11 @@ export const AnalyticsPage = observer(() => {
                         <div className={styles.divider}/>
                         {analyticsStore.appliedSettingsCount > 0 &&
                             <div className={styles.appliedSettingsCard}>
-                                <div className={styles.header}>
+                                <div className={styles.header}
+                                     onClick={() => {
+                                         setIsAppliedSettingsCardExpanded(!isAppliedSettingsCardExpanded)
+                                     }}
+                                >
                                     Выбранные настройки{" "}
                                     <span className={styles.count}>
                                         ({analyticsStore.appliedSettingsCount})
@@ -298,23 +308,48 @@ export const AnalyticsPage = observer(() => {
                                     style={{
                                         transform: `rotate(${isAppliedSettingsCardExpanded ? 0 : 180}deg)`
                                     }}
-                                    onClick={() => setIsAppliedSettingsCardExpanded(!isAppliedSettingsCardExpanded)}
+                                    onClick={(event) => {
+                                        event.stopPropagation();
+                                        setIsAppliedSettingsCardExpanded(!isAppliedSettingsCardExpanded)
+                                    }}
                                 >
                                     <img src={chevronIcon}/>
                                 </button>
                                 {isAppliedSettingsCardExpanded &&
-                                    <div className={styles.chips}>
+                                    <div className={styles.chips} onClick={(event) => event.stopPropagation()}>
                                         {analyticsStore.period !== "all" &&
                                             <div className={styles.chip}>
                                                 Период: {periodOptions.find(
-                                                    p => p.value === analyticsStore.period)?.name?.toLowerCase()
-                                                }
+                                                p => p.value === analyticsStore.period)?.name?.toLowerCase()
+                                            }
                                                 <button className={styles.clearButton}
                                                         onClick={() => analyticsStore.period = "all"}>
                                                     <img src={xMark}/>
                                                 </button>
                                             </div>
                                         }
+                                        {postamatStore.selectedPostamat &&
+                                            <div className={styles.chip}>
+                                                {postamatStore.selectedPostamat.address}
+                                                <button className={styles.clearButton}
+                                                        onClick={() => {
+                                                            postamatStore.selectedPostamat = undefined
+                                                            postamatStore.selectedRegionIds = []
+                                                            postamatStore.selectedDistrictIds = []
+                                                        }}>
+                                                    <img src={xMark}/>
+                                                </button>
+                                            </div>
+                                        }
+                                        {!postamatStore.selectedPostamat && postamatStore.selectedDistrictIds.map(district_id =>
+                                            <div className={styles.chip}>
+                                                Район: {postamatStore.getDistrictById(district_id)?.name}
+                                                <button className={styles.clearButton}
+                                                        onClick={() => postamatStore.toggleDistrict(district_id)}>
+                                                    <img src={xMark}/>
+                                                </button>
+                                            </div>
+                                        )}
                                     </div>
                                 }
                             </div>

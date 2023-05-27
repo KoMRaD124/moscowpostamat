@@ -34,6 +34,14 @@ class PostamatStore {
 
     searchValue = ""
 
+    getDistrictById(id: number) {
+        return this.districts?.find(d => d.id === id)
+    }
+
+    getRegionById(id: number) {
+        return this.regions?.find((r => r.id === id))
+    }
+
     clearSelection() {
         this.selectedRegionIds = []
         this.selectedDistrictIds = []
@@ -64,6 +72,9 @@ class PostamatStore {
             this.selectedDistrictIds = this.selectedDistrictIds.filter(d => !districtIds.includes(d))
         } else {
             this.selectedRegionIds?.push(id)
+            this.selectedDistrictIds.push(
+                ...(this.districts?.filter(d => d.region_id === id).map(d => d.id) ?? [])
+            )
         }
     }
 
