@@ -66,13 +66,13 @@ class AnalyticsStore {
             q1 += q
             q2 += q
             q3 += q
-        }
-
-        if (postamatStore.selectedDistrictIds.length) {
-            const q = `&district_ids=${postamatStore.selectedDistrictIds.join(",")}`
-            q1 += q
-            q2 += q
-            q3 += q
+        } else {
+            if (postamatStore.selectedDistrictIds.length) {
+                const q = `&district_ids=${postamatStore.selectedDistrictIds.join(",")}`
+                q1 += q
+                q2 += q
+                q3 += q
+            }
         }
 
         const req1 = axios.get(q1)
@@ -90,9 +90,10 @@ class AnalyticsStore {
         let q = `${domain}/api/admin/reviews/avg-rating?period=${this.period}`;
         if (postamatStore.selectedPostamat) {
             q += `&postamat_id=${postamatStore.selectedPostamat.id}`
-        }
-        if (postamatStore.selectedDistrictIds.length) {
-            q += `&district_ids=${postamatStore.selectedDistrictIds.join(",")}`
+        } else {
+            if (postamatStore.selectedDistrictIds.length) {
+                q += `&district_ids=${postamatStore.selectedDistrictIds.join(",")}`
+            }
         }
         const res = await axios.get(q)
         this.avgRating = res.data.year_avg;
@@ -102,9 +103,10 @@ class AnalyticsStore {
         let q = `${domain}/api/admin/reviews/avg-rating-series?period=${this.period}`
         if (postamatStore.selectedPostamat) {
             q += `&postamat_id=${postamatStore.selectedPostamat.id}`
-        }
-        if (postamatStore.selectedDistrictIds.length) {
-            q += `&district_ids=${postamatStore.selectedDistrictIds.join(",")}`
+        } else {
+            if (postamatStore.selectedDistrictIds.length) {
+                q += `&district_ids=${postamatStore.selectedDistrictIds.join(",")}`
+            }
         }
         const res = await axios.get(q)
         this.ratingSeries = res.data;
@@ -125,9 +127,10 @@ class AnalyticsStore {
         let q = `${domain}/api/admin/review-categories/applied-count?period=${this.period}`
         if (postamatStore.selectedPostamat) {
             q += `&postamat_id=${postamatStore.selectedPostamat.id}`
-        }
-        if (postamatStore.selectedDistrictIds.length) {
-            q += `&district_ids=${postamatStore.selectedDistrictIds.join(",")}`
+        } else {
+            if (postamatStore.selectedDistrictIds.length) {
+                q += `&district_ids=${postamatStore.selectedDistrictIds.join(",")}`
+            }
         }
         const res = await axios.get(q)
         this.appliedReviewCategories = res.data;
@@ -137,12 +140,10 @@ class AnalyticsStore {
         let q = `${domain}/api/admin/task-categories/applied-count?period=${this.period}`
         if (postamatStore.selectedPostamat) {
             q += `&postamat_id=${postamatStore.selectedPostamat.id}`
-        }
-        if (postamatStore.selectedRegionIds.length) {
-            q += `&region_ids=${postamatStore.selectedRegionIds.join(",")}`
-        }
-        if (postamatStore.selectedDistrictIds.length) {
-            q += `&district_ids=${postamatStore.selectedDistrictIds.join(",")}`
+        } else {
+            if (postamatStore.selectedDistrictIds.length) {
+                q += `&district_ids=${postamatStore.selectedDistrictIds.join(",")}`
+            }
         }
         const res = await axios.get(q)
         this.appliedTaskCategories = res.data;
