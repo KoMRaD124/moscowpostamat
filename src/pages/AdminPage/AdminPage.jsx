@@ -8,9 +8,17 @@ import { navRoutes } from "../../routes/navRoutes";
 import { observer } from "mobx-react-lite";
 import { searchStore } from "../../mobxStore/store";
 import { SearchResult } from "../../components/Admin/Header/Search/SearchResult/SearchResult";
-
+import { arrowUp } from "../../assets/img";
 
 export const AdminPage = observer(() => {
+  const scrollToTop = React.useRef(null);
+
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
 
   return (
     <>
@@ -18,6 +26,12 @@ export const AdminPage = observer(() => {
         <SideBar />
         <div className={styles.content}>
           <Header />
+          <button
+            className={styles.scrollToTopButton}
+            onClick={handleScrollToTop}
+            ref={scrollToTop}
+          > <img src={arrowUp} alt="" srcset="" /></button>
+           <div ref={scrollToTop}></div>
           <Routes>
             {navRoutes.map((route) => (
               <Route
@@ -26,11 +40,8 @@ export const AdminPage = observer(() => {
                 key={route.path}
               />
             ))}
-            
-            <Route
-                path="/search"
-                element={<SearchResult/>}
-              />
+
+            <Route path="/search" element={<SearchResult />} />
           </Routes>
         </div>
       </div>
