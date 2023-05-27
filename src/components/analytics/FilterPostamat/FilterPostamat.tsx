@@ -108,7 +108,7 @@ export const FilterPostamat = observer((props: {
                             value={postamatStore.selectedPostamat?.address ?? postamatStore.searchValue}
                             onChange={(event) => postamatStore.searchValue = event.target.value}
                             className={styles.input}
-                            placeholder={"ул. Мосфильмовская, д. 8, Москва"}
+                            placeholder={"Адрес постамата"}
                             disabled={!!postamatStore.selectedPostamat}
                         />
                         <img src={searchIcon} className={styles.searchIcon}/>

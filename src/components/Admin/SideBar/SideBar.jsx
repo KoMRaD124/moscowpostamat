@@ -9,6 +9,7 @@ export const SideBar = () => {
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
+    console.log(selectedFile);
     handleUpload(selectedFile);
   };
 
@@ -16,6 +17,9 @@ export const SideBar = () => {
     if (file) {
       const formData = new FormData();
       formData.append("file", file);
+
+      // TODO: Just for testing
+      formData.append("limit", "5000");
 
       axios
         .post(`${domain}/api/admin/reviews/import-dataset`, formData)
