@@ -20,4 +20,5 @@ import error from "./error.svg"
 import xmark from "./Xmark.svg"
 import arrowBack from "./ArrowBack.svg"
 import arrowUp from "./arrowUp.svg"
-export{loaderWhiteSvg,loaderRedSvg,arrowUp,loginPageBG,logoRed,showPass,dontShowPass,logoWhite,Access,Analytics,comments,Logout,main,Tasks,Plus,Delete,Arrow,searchButton,success,error,xmark,arrowBack}
+import video from "./video.svg"
+export{loaderWhiteSvg,video,loaderRedSvg,arrowUp,loginPageBG,logoRed,showPass,dontShowPass,logoWhite,Access,Analytics,comments,Logout,main,Tasks,Plus,Delete,Arrow,searchButton,success,error,xmark,arrowBack}
