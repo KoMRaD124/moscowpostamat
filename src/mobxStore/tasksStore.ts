@@ -6,7 +6,7 @@ import {categories} from "../constants/categories";
 import {postamatStore} from "./postamatStore";
 import {IReview} from "./reviewsStore";
 
-interface ITask {
+export interface ITask {
     id: string,
     name: string,
     created_at: string,
