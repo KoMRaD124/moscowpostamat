@@ -9,7 +9,7 @@ import { main,comments,Tasks,Analytics,Access } from "../assets/img";
 
 export const navRoutes = [
   {
-    path: "/Home",
+    path: "/",
     element: <MainPage />,
     icon: main,
     name:"Главная"

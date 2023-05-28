@@ -67,7 +67,9 @@ export const MainPage = () => {
 
 
   React.useEffect(() => {
+    
     allFetch();
+   
   }, []);
   const avgRate = useSelector((state) => state.rating.rating);
   console.log(avgRate);
@@ -87,7 +89,7 @@ export const MainPage = () => {
   if (openTask) {
     openTaskArray = openTask.slice(0, 4);
   }
-  if (isLoading) {
+  if (isLoading||openTask) {
     return (
       <div className={styles.body}>
         <h2 className={styles.welcome}>Добро пожаловать, {userName}!</h2>
