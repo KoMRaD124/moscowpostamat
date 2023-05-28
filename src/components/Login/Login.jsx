@@ -14,7 +14,7 @@ export const Login = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
   const [login, setLogin] = React.useState("");
-  const[isError, setIsError]=React.useState(false)
+  const [isError, setIsError] = React.useState(false);
   const [password, setPassword] = React.useState("");
   const data = {
     email: login,
@@ -27,11 +27,11 @@ export const Login = () => {
       .then((response) => {
         dispatch(setAuth(response.data));
         navigate("/Home");
-        setIsError(false)
+        setIsError(false);
       })
       .catch((error) => {
         console.error(error);
-        setIsError(true)
+        setIsError(true);
       });
   };
   React.useEffect(() => {
@@ -43,7 +43,46 @@ export const Login = () => {
     <div className={styles.body}>
       <div className={styles.content}>
         <img src={logoRed} alt="" srcset="" />
-        <div className={styles.login}>
+        <form action="" onSubmit={(e) => e.preventDefault()}>
+          <div className={styles.login}>
+            <div className={styles.inputText}>Почта</div>
+            <Input
+              type="text"
+              isError={isError}
+              placeholder="Введите почту"
+              onChange={(e) => setLogin(e.target.value)}
+            />
+          </div>
+          <div className={styles.password}>
+            <div className={styles.inputText}>Пароль</div>
+            <Input
+              type="password"
+              isError={isError}
+              placeholder={"Введите пароль"}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className={styles.buttonContainer}>
+            <div className={styles.button}>
+              <MyButton
+                /* type={"submit"} */
+                redButton
+                onClick={() => sendLogpass()}
+                disabled={!(login && password)}
+              >
+                Войти
+              </MyButton>
+            </div>
+            {isError ? (
+              <div className={styles.pasText}>
+                Неправильная почта <br /> или пароль
+              </div>
+            ) : (
+              <></>
+            )}
+          </div>
+        </form>
+        {/* <div className={styles.login}>
           <div className={styles.inputText}>Почта</div>
           <Input
             type="text"
@@ -52,7 +91,6 @@ export const Login = () => {
             onChange={(e) => setLogin(e.target.value)}
           />
         </div>
-
         <div className={styles.password}>
           <div className={styles.inputText}>Пароль</div>
           <Input
@@ -72,9 +110,9 @@ export const Login = () => {
               Войти
             </MyButton>
           </div>
+       
           {isError?<div className={styles.pasText}>Неправильная почта <br /> или пароль</div>:<></>}
-        </div>
-        
+        </div> */}
       </div>
     </div>
   );
