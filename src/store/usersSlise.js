@@ -12,7 +12,7 @@ const authSlise=createSlice({
     reducers:{
         setUsers(state,action){
             state.users=action.payload
-            console.log(state.users);
+           
         },
         addUser(state,action){
             state.users.push(action.payload);

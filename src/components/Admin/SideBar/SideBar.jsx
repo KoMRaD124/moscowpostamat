@@ -4,9 +4,15 @@ import { logoWhite } from "../../../assets/img";
 import { LeftMenu } from "../LeftMenu/LeftMenu";
 import axios from "axios";
 import { domain } from "../../../constants/config";
+import { LoadDataModal } from "../LeftMenu/sideBarScreen/loadDataModal";
+import { SuccesfullDataLoad } from "../LeftMenu/sideBarScreen/SuccesfullDataLoad/SuccesfullDataLoad";
+
+
+
 export const SideBar = () => {
   const fileInputRef = React.useRef(null);
-
+  const[startLoading,SetStartLoading]= React.useState(false)
+  const[succesLoading,SetSuccesLoading]= React.useState(false)
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     console.log(selectedFile);
@@ -17,7 +23,8 @@ export const SideBar = () => {
     if (file) {
       const formData = new FormData();
       formData.append("file", file);
-
+      SetStartLoading(true)
+      
       // TODO: Just for testing
       formData.append("limit", "5000");
 
@@ -25,7 +32,8 @@ export const SideBar = () => {
         .post(`${domain}/api/admin/reviews/import-dataset`, formData)
         .then((response) => {
           console.log(response.data);
-          // Дополнительная обработка успешной загрузки
+          SetStartLoading(false)
+          SetSuccesLoading(true)
         })
         .catch((error) => {
           console.error(error);
@@ -38,6 +46,7 @@ export const SideBar = () => {
 
   const handleClick = () => {
     fileInputRef.current.click();
+    
   };
   return (
     <div className={styles.body}>
@@ -51,6 +60,8 @@ export const SideBar = () => {
           Загрузить дата-сет
         </button>
       </div>
+      {startLoading?<LoadDataModal/>:<></>}
+      {succesLoading?<SuccesfullDataLoad SetSuccesLoading={SetSuccesLoading}/>:<></>}
     </div>
   );
 };

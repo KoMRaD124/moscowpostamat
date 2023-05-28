@@ -11,7 +11,8 @@ import { SearchResult } from "../../components/Admin/Header/Search/SearchResult/
 import { arrowUp } from "../../assets/img";
 import {ReviewPage} from "../ReviewPage/ReviewPage";
 import {TaskPage} from "../TaskPage/TaskPage";
-import { LoadData } from "../../components/Admin/Access/AccessScreens/Modal/LoadData";
+import { LoadDataModal } from "../../components/Admin/LeftMenu/sideBarScreen/loadDataModal";
+
 
 export const AdminPage = observer(() => {
   const scrollToTop = React.useRef(null);

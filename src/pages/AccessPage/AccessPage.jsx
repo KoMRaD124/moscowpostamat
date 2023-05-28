@@ -17,6 +17,7 @@ export const AccessPage = () => {
   const successIsActive=useSelector((state)=>state.users.SuccesfullisActive)
   const ErrorisActive=useSelector((state)=>state.users.ErrorisActive)
   const UserDelete=useSelector((state)=>state.users.UserDel)
+  const currentRole=useSelector((state)=>state.auth.auth.role)
   const delEmail=useSelector((state)=>state.users.delEmail)
   const dispatch = useDispatch();
   const usersData = useSelector((state) => state.users.users);
@@ -28,8 +29,6 @@ export const AccessPage = () => {
       .get(`${domain}/api/admin/users`)
       .then((response) => {
         dispatch(setUsers(response.data));
-
-        console.log(response.data);
       })
       .catch((error) => {
         console.log("запрос пользователей " + error);
@@ -44,6 +43,7 @@ export const AccessPage = () => {
       <div className={styles.dataArray}>
         {adminArray.length===0?<div className={styles.emptyArray}>Отсутствуют пользователи с этой ролью</div>:adminArray.map((el) => (
           <UserCard
+            canDel={currentRole==="root"}
             name={el.name}
             email={el.email}
             id={el.id}
@@ -56,6 +56,7 @@ export const AccessPage = () => {
       <div className={styles.dataArray}>
         {userArray.length===0?<div className={styles.emptyArray}>Отсутствуют пользователи с этой ролью</div>:userArray.map((el) => (
           <UserCard
+            canDel={true}
             name={el.name}
             email={el.email}
             id={el.id}

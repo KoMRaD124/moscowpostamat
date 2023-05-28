@@ -74,7 +74,7 @@ export const MainPage = () => {
 
   }, []);
   const avgRate = useSelector((state) => state.rating.rating);
-  console.log(avgRate);
+
 
   const [avgRating, setAvgRating] = React.useState(avgRate.month);
 
@@ -86,7 +86,7 @@ export const MainPage = () => {
     (state) => state.inProgressTasks.inProgressTasks.result
   );
   const openTask = useSelector((state) => state.openTasks.openTasks.result);
-  console.log(inProgressTask);
+
   let openTaskArray = [];
   if (openTask) {
     openTaskArray = openTask.slice(0, 4);
@@ -192,6 +192,7 @@ export const MainPage = () => {
                   date={el.created_at.substr(0, 5)}
                   address={el.review.postamat_address}
                   id={el.id}
+                  key={el.id+el.name}
                 />
               ))}
             </div>

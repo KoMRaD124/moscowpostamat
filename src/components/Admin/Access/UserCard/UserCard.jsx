@@ -5,11 +5,11 @@ import classNames from "classnames";
 import { DeleteScreen } from "../AccessScreens/DeleteScreen/DeleteScreen";
 import { useSelector } from "react-redux";
 
-export const UserCard = ({ name, email, id,role }) => {
+export const UserCard = ({ name, email, id,role,canDel }) => {
   const [isHovered, setIsHovered] = React.useState(false);
   const [isDel, setIsDel] = React.useState(true);
   const isRoot=useSelector((state)=>state.auth.auth.role)
-  console.log(isRoot);
+ 
   const handleHover = () => {
     setIsHovered(true);
   };
@@ -30,7 +30,7 @@ export const UserCard = ({ name, email, id,role }) => {
             <div className={styles.subname}>{email}</div>
           </div>
         </div>
-        {isRoot==="root"?<div
+        {canDel?<div
           onMouseEnter={handleHover}
           onMouseLeave={handleLeave}
           onClick={() => setIsDel(false)}

@@ -21,4 +21,10 @@
   z-index: 999;
   background: #2f3342;
   box-shadow: 0px 0px 12px rgba(157, 174, 198, 0.65);
+  &:hover {
+    background: #525971;
+    /* Тень для белых блоков */
+
+    box-shadow: 0px 0px 12px rgba(157, 174, 198, 0.65);
+  }
 }

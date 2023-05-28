@@ -8,7 +8,6 @@ const openTasksSlise=createSlice({
     reducers:{
         setOpenTask(state,action){
             state.openTasks=action.payload
-            console.log(state.openTasks)
         }
         
     }

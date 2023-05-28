@@ -8,7 +8,7 @@ const inProgressTasksSlise=createSlice({
     reducers:{
         setInProgressTask(state,action){
             state.inProgressTasks=action.payload
-            console.log(state.inProgressTasks)
+            
         }
         
     }

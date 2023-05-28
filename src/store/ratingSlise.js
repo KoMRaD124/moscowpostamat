@@ -12,7 +12,7 @@ const ratingSlise=createSlice({
                 month:action.payload.month_avg,
                 week:action.payload.day_avg
              }
-            console.log(state.rating);
+
         }
         
     }
