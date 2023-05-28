@@ -18,7 +18,7 @@ export const Input = ({ type, placeholder, value, onChange,isError }) => {
       onChange={onChange}
     />
     {type === 'password' && (
-      <button
+      <div
       onClick={handleTogglePassword}
       style={{
         position: 'absolute',
@@ -35,7 +35,7 @@ export const Input = ({ type, placeholder, value, onChange,isError }) => {
       ) : (
         <img src={dontShowPass} alt="пароль показан" />
       )}
-    </button>
+    </div>
     )}
   </div>
 );

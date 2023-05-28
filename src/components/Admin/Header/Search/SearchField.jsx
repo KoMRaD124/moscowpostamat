@@ -40,6 +40,7 @@ export const SearchField = observer(() => {
   return (
     <>
       <div style={{ position: "relative", with: "100%" }}>
+        <form action="" onSubmit={(e)=>e.preventDefault()}>
         <input
           onChange={(e) => {setSearchValue(e.target.value);}}
           value={searchValue}
@@ -53,7 +54,7 @@ export const SearchField = observer(() => {
           className={styles.button}
         >
           <img src={searchButton} alt="" />
-        </button>
+        </button></form>
       </div>
       {/* {isActive?<></>:<SearchResult setIsActive={setIsActive} searchValue={searchValue}/>} */}
     </>
