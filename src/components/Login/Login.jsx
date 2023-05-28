@@ -42,7 +42,7 @@ export const Login = () => {
   return (
     <div className={styles.body}>
       <div className={styles.content}>
-        <img src={logoRed} alt="" srcset="" />
+        <img src={logoRed} alt="" />
         <form action="" onSubmit={(e) => e.preventDefault()}>
           <div className={styles.login}>
             <div className={styles.inputText}>Почта</div>

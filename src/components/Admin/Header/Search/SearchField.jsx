@@ -18,7 +18,7 @@ export const SearchField = observer(() => {
         navigate("/search");
         setSearchValue("")
         searchStore.setIsActive(true)
-        
+
       })
 
       .catch((error) => {
@@ -53,7 +53,7 @@ export const SearchField = observer(() => {
           onClick={() => searchFetch()}
           className={styles.button}
         >
-          <img src={searchButton} alt="" />
+          <img src={searchButton} alt=""/>
         </button></form>
       </div>
       {/* {isActive?<></>:<SearchResult setIsActive={setIsActive} searchValue={searchValue}/>} */}
@@ -77,7 +77,7 @@ export const SearchField = observer(() => {
           cursor: "pointer",
         }}
       >
-        <img src={searchButton} alt="" />
+        <img src={searchButton} alt=/>
       </button>
     </div> */
   );

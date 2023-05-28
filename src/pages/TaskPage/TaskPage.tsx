@@ -30,7 +30,7 @@ export const TaskPage = observer(() => {
             <div className={styles.body}>
                 <div className={styles.header}>
                     <button className={styles.buttonBack} onClick={() => navigate("/tasks")}>
-                        <img src={arrowBack} alt="" srcSet=""/>
+                        <img src={arrowBack} alt="" />
                     </button>
                     <div className={styles.headerText}>Загрузка ...</div>
                 </div>

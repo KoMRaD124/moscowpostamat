@@ -11,15 +11,15 @@ export const ErrorModal = ({ isActive }) => {
       <div className={styles.content} onClick={(e) => e.stopPropagation()}>
         <div className={styles.container}>
           <div className={styles.containerMain}>
-            <div className={styles.img}><img src={error} alt="" srcSet="" /></div>
+            <div className={styles.img}><img src={error} alt="" /></div>
             <div className={styles.header}>Произошла ошибка</div>
             <div className={styles.textError}>
-            Возникли технические трудности при добавлении 
+            Возникли технические трудности при добавлении
 пользователя. Попробуйте повторить позже.
             </div>
           </div>
           <button className={styles.containerButton}>
-            <img onClick={() => dispatch(closeModal())} src={xmark} alt="" srcset="" />
+            <img onClick={() => dispatch(closeModal())} src={xmark} alt="" />
           </button>
         </div>
       </div>

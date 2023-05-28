@@ -43,7 +43,7 @@ export const SearchResult = observer(() => {
       <header className={styles.header}>
         <div className={styles.head}>Результаты поиска</div>{" "}
         <button className={styles.button} onClick={() => navigate(-1)}>
-          <img src={xmark} alt="" srcset="" />
+          <img src={xmark} alt="" />
         </button>
       </header>
       <div className={styles.divider}></div>
@@ -58,14 +58,15 @@ export const SearchResult = observer(() => {
         <></>
       ) : (
         <>
-          <div className={styles.subHead}>Комментарии</div>
+          <div className={styles.subHead}>Отзывы</div>
           <button
             className={styles.subHeadText}
             onMouseEnter={handleHover}
             onMouseLeave={handleLeave}
+            onClick={() => navigate("/reviews")}
           >
             <p>
-              Посмотреть все комментарии
+              Посмотреть все отзывы
             </p>{" "}
             <Arrow
               className={classNames({
@@ -93,7 +94,9 @@ export const SearchResult = observer(() => {
           <div className={styles.subHead}>Задачи</div>
           <button className={styles.subHeadText}
           onMouseEnter={handleHoverTask}
-          onMouseLeave={handleLeaveTask}>
+          onMouseLeave={handleLeaveTask}
+          onClick={() => navigate("/tasks")}
+          >
             <p>Посмотреть все задачи</p>{" "}
             <Arrow
                 className={classNames({

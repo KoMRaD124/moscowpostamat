@@ -9,8 +9,10 @@ import classNames from "classnames";
 import { setOpenTask } from "../../store/openTasksSlise";
 import { setInProgressTask } from "../../store/inProgressTasksSlise";
 import { ReactComponent as Arrow } from "../../assets/img/Arrow.svg";
+import {useNavigate} from "react-router-dom";
 
 export const MainPage = () => {
+  const navigate = useNavigate()
   const [isLoading, setIsloading] = React.useState(false);
   const allFetch = async () => {
     try {
@@ -139,6 +141,7 @@ export const MainPage = () => {
               className={styles.averageShowAll}
               onMouseEnter={handleHover}
               onMouseLeave={handleLeave}
+              onClick={() => navigate("/analytics")}
             >
               Посмотреть подробности{" "}
               <Arrow
@@ -168,6 +171,7 @@ export const MainPage = () => {
               className={styles.tasksShowAll}
               onMouseEnter={handleHoverTask}
               onMouseLeave={handleLeaveTask}
+              onClick={() => navigate("/tasks?status=in_progress")}
             >
               Все задачи в работе{" "}
               <Arrow
@@ -187,7 +191,7 @@ export const MainPage = () => {
                   type={el.name}
                   date={el.created_at.substr(0, 5)}
                   address={el.review.postamat_address}
-                  id={el.review.id}
+                  id={el.id}
                 />
               ))}
             </div>
@@ -195,6 +199,7 @@ export const MainPage = () => {
               className={styles.tasksShowAll}
               onMouseEnter={handleHoverTaskall}
               onMouseLeave={handleLeaveTaskall}
+              onClick={() => navigate("/tasks")}
             >
               Все задачи, требующие решения{" "}
               <Arrow

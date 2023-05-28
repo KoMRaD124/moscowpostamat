@@ -43,7 +43,7 @@ export const SideBar = () => {
     <div className={styles.body}>
       <div className={styles.content}>
         <div className={styles.hiddenInput}></div>
-        <img className={styles.logo} src={logoWhite} alt="" srcSet="" />
+        <img className={styles.logo} src={logoWhite} alt=""/>
         <LeftMenu />
         <input type="file" ref={fileInputRef} onChange={handleFileChange} className={styles.hi} />
 

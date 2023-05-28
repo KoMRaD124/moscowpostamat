@@ -6,8 +6,11 @@ import {FilterPostamat} from "../../components/analytics/FilterPostamat/FilterPo
 import chevronIcon from "../../assets/img/select/chevron.svg"
 import {postamatStore} from "../../mobxStore/postamatStore";
 import xMark from "../../assets/img/Xmark.svg";
+import {useNavigate} from "react-router-dom";
 
 export const PostamatListPage = observer(() => {
+    const navigate = useNavigate()
+
     useEffect(() => {
         postamatStore.clearSelection()
         postamatStore.fetchPostamats()
@@ -93,7 +96,12 @@ export const PostamatListPage = observer(() => {
                         </div>
                         <div className={styles.list}>
                             {postamatStore.filteredPostamats?.map(p =>
-                                <button className={styles.listItem}>
+                                <button className={styles.listItem}
+                                    onClick={() => {
+                                        navigate("/reviews")
+                                        setTimeout(() => postamatStore.selectedPostamat = p)
+                                    }}
+                                >
                                     <div className={styles.id}>{p.id}</div>
                                     {p.address}
                                 </button>

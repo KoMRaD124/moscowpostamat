@@ -32,7 +32,7 @@ export const AdminPage = observer(() => {
             className={styles.scrollToTopButton}
             onClick={handleScrollToTop}
             ref={scrollToTop}
-          > <img src={arrowUp} alt="" srcset="" /></button>
+          > <img src={arrowUp} alt="" /></button>
            <div ref={scrollToTop}></div>
           <Routes>
             {navRoutes.map((route) => (

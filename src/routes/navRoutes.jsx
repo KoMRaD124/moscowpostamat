@@ -34,7 +34,7 @@ export const navRoutes = [
         name: "Задачи"
     },
     {
-        path: "/Analytics",
+        path: "/analytics",
         element: <AnalyticsPage/>,
         icon: Analytics,
         name: "Аналитика"

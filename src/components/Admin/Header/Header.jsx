@@ -13,17 +13,17 @@ export const Header = () => {
         <SearchField />
         <div className={styles.buttonBlock}>
           <a href="https://www.mos.ru/city/projects/postamat/" className={styles.video}>
-            <img src={video} alt="" srcset="" />
+            <img src={video} alt="" />
             Обучение
           </a>
           <div className={styles.button} onClick={() => setIsExit(false)}>
-            <img src={Logout} alt="Кнопка выхода" srcSet="" />
+            <img src={Logout} alt="Кнопка выхода" />
             <p className={styles.buttonText}>Выход</p>
           </div>
         </div>
-        {/* <a href="" className={styles.video}><img src={video} alt="" srcset="" />Обучение</a>
+        {/* <a href="" className={styles.video}><img src={video} alt="" />Обучение</a>
         <div className={styles.button} onClick={()=>setIsExit(false)}>
-          <img src={Logout} alt="Кнопка выхода" srcSet="" />
+          <img src={Logout} alt="Кнопка выхода" />
           <p className={styles.buttonText}>Выход</p>
         </div> */}
       </div>

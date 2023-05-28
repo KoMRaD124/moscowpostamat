@@ -17,12 +17,18 @@ import {
 import classNames from "classnames";
 import {FilterTasks} from "../../components/tasks/FilterTasks/FilterTasks";
 import {Sort} from "../../components/common/Sort/Sort";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 export const TaskListPage = observer(() => {
     const navigate = useNavigate()
+    let [searchParams] = useSearchParams();
 
     useEffect(() => {
+        if (searchParams.get("status") === "in_progress") {
+            tasksStore.statusFilter = "in_progress"
+        } else {
+            tasksStore.statusFilter = "open"
+        }
         postamatStore.clearSelection()
     }, [])
 

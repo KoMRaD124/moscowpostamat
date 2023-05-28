@@ -13,12 +13,12 @@ export const AcessHead = () => {
       <h1 className={styles.header}>Доступы</h1>
       <div className={styles.head}>
         <button className={styles.button} onClick={() => setUser(true)}>
-          <img src={Plus} alt="" srcSet="" />
+          <img src={Plus} alt=""/>
           <p className={styles.btnText}>Добавить пользователя</p>
         </button>
         {userRoot === "root" ? (
           <button className={styles.button} onClick={() => setadmin(true)}>
-          <img src={Plus} alt="" srcSet="" />
+          <img src={Plus} alt=""/>
           <p className={styles.btnText}>Добавить администратора</p>
         </button>
         ) : (
