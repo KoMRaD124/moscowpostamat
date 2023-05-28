@@ -7,6 +7,7 @@ const authSlise=createSlice({
         SuccesfullisActive:false,
         ErrorisActive:false,
         UserDel:false,
+        UserDelSuccesfull:false,
         delEmail:""
     },
     reducers:{
@@ -27,13 +28,18 @@ const authSlise=createSlice({
             state.SuccesfullisActive=false;
             state.ErrorisActive=false;
             state.UserDel=false
+            state.UserDelSuccesfull=false
 
         },
+        setDelSuccesfull(state){
+            state.UserDelSuccesfull=true
+          
+        },
         openError(state){
-            state.ErrorisActive=true;
+            state.ErrorisActive=true
         }
 
     }
 });
-export const {setUsers,deleteUser,addUser,openError,closeModal}=authSlise.actions
+export const {setUsers,deleteUser,addUser,openError,closeModal,setDelSuccesfull}=authSlise.actions
 export default authSlise.reducer

@@ -10,6 +10,9 @@ import { setOpenTask } from "../../store/openTasksSlise";
 import { setInProgressTask } from "../../store/inProgressTasksSlise";
 import { ReactComponent as Arrow } from "../../assets/img/Arrow.svg";
 import {useNavigate} from "react-router-dom";
+import { LoadDataModal } from "../../components/Admin/LeftMenu/sideBarScreen/loadDataModal";
+import { DeleteScreenSuccesfull } from "../../components/Admin/Access/AccessScreens/DeleteScreenSuccesfull/DeleteScreenSuccesfull";
+import { closeModal } from "../../store/usersSlise";
 
 export const MainPage = () => {
   const navigate = useNavigate()
@@ -44,6 +47,7 @@ export const MainPage = () => {
   const [isHovered, setIsHovered] = React.useState(false);
   const [isHoveredTask, setIsHoveredTask] = React.useState(false);
   const [isHoveredall, setIsHoveredTall] = React.useState(false);
+  const UserDelSuccesfull=useSelector((state)=>state.users.UserDelSuccesfull)
 
   const handleHover = () => {
     setIsHovered(true);

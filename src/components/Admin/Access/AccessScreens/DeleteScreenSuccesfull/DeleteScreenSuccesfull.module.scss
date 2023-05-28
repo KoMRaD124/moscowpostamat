@@ -9,12 +9,13 @@
   width: 100vw;
   height: 100vh;
   background-color: rgba(47, 51, 66, 0.7);
-  z-index: 100000;
-  pointer-events: none;
+  z-index: 10000;
 }
 .content {
+  z-index: 10000;
   width: 610px;
-
+  display: flex;
+  justify-content: space-between;
   background-color: $color-white;
   border-radius: 16px;
   opacity: 1;
@@ -43,4 +44,16 @@
   letter-spacing: 0.01em;
   color: #9da1ae;
   margin-top: 30px;
+}
+.button{
+  margin-top: -12px;
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover{
+    background: #DEE4ED;
+    border-radius: 27px;
+  }
 }

@@ -12,7 +12,7 @@ export const Header = () => {
       <div className={styles.body}>
         <SearchField />
         <div className={styles.buttonBlock}>
-          <a href="https://www.mos.ru/city/projects/postamat/" className={styles.video}>
+          <a href="https://drive.google.com/file/d/1Tk-nru1anuZX-L99ZJVY0GvE6JPesqv8/view" target="_blank" rel="noreferrer" className={styles.video}>
             <img src={video} alt="" />
             Обучение
           </a>
