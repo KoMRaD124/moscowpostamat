@@ -71,7 +71,7 @@ export const AccessPage = () => {
       {successIsActive?<SuccesfullModal/>:<></>}
       {ErrorisActive?<ErrorModal/>:<></>}
       {UserDelete?<UserDel email={delEmail}/>:<></>}
-      {UserDelSuccesfull?<DeleteScreenSuccesfull email={delEmail}/>:<></>}
+      {/* {UserDelSuccesfull?<DeleteScreenSuccesfull email={delEmail}/>:<></>} */}
     </div>
   );
 };

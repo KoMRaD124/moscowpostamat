@@ -13,6 +13,8 @@ import {useNavigate} from "react-router-dom";
 import { LoadDataModal } from "../../components/Admin/LeftMenu/sideBarScreen/loadDataModal";
 import { DeleteScreenSuccesfull } from "../../components/Admin/Access/AccessScreens/DeleteScreenSuccesfull/DeleteScreenSuccesfull";
 import { closeModal } from "../../store/usersSlise";
+import { DeleteScreen } from "../../components/Admin/Access/AccessScreens/DeleteScreen/DeleteScreen";
+import { SuccesfullDataLoad } from "../../components/Admin/LeftMenu/sideBarScreen/SuccesfullDataLoad/SuccesfullDataLoad";
 
 export const MainPage = () => {
   const navigate = useNavigate()
@@ -47,7 +49,8 @@ export const MainPage = () => {
   const [isHovered, setIsHovered] = React.useState(false);
   const [isHoveredTask, setIsHoveredTask] = React.useState(false);
   const [isHoveredall, setIsHoveredTall] = React.useState(false);
-  const UserDelSuccesfull=useSelector((state)=>state.users.UserDelSuccesfull)
+  const dataLoad=useSelector((state)=>state.users.dataLoad)
+  const dataLoadSucces=useSelector((state)=>state.users.dataLoadSucces)
 
   const handleHover = () => {
     setIsHovered(true);
@@ -215,6 +218,9 @@ export const MainPage = () => {
             </button>
           </div>
         </div>
+
+        {dataLoad?<LoadDataModal/>:<></>}
+        {dataLoadSucces?<SuccesfullDataLoad/>:<></>}
       </div>
     );
   }

@@ -6,16 +6,18 @@ import axios from "axios";
 import { domain } from "../../../constants/config";
 import { LoadDataModal } from "../LeftMenu/sideBarScreen/loadDataModal";
 import { SuccesfullDataLoad } from "../LeftMenu/sideBarScreen/SuccesfullDataLoad/SuccesfullDataLoad";
+import { useDispatch } from "react-redux";
+import { loadData, loadDataSuccesfull } from "../../../store/usersSlise";
 
 
 
 export const SideBar = () => {
   const fileInputRef = React.useRef(null);
-  const[startLoading,SetStartLoading]= React.useState(false)
-  const[succesLoading,SetSuccesLoading]= React.useState(false)
+  
+  const dispatch=useDispatch()
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
-    console.log(selectedFile);
+    dispatch(loadData())
     handleUpload(selectedFile);
   };
 
@@ -23,7 +25,7 @@ export const SideBar = () => {
     if (file) {
       const formData = new FormData();
       formData.append("file", file);
-      SetStartLoading(true)
+      dispatch(loadData())
       
       // TODO: Just for testing
       formData.append("limit", "5000");
@@ -32,8 +34,7 @@ export const SideBar = () => {
         .post(`${domain}/api/admin/reviews/import-dataset`, formData)
         .then((response) => {
           console.log(response.data);
-          SetStartLoading(false)
-          SetSuccesLoading(true)
+          dispatch(loadDataSuccesfull())
         })
         .catch((error) => {
           console.error(error);
@@ -60,8 +61,7 @@ export const SideBar = () => {
           Загрузить дата-сет
         </button>
       </div>
-      {startLoading?<LoadDataModal/>:<></>}
-      {succesLoading?<SuccesfullDataLoad SetSuccesLoading={SetSuccesLoading}/>:<></>}
+
     </div>
   );
 };

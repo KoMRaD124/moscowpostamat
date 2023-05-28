@@ -1,8 +1,11 @@
 import React from "react";
 import styles from "./succesfullDataLoad.module.scss";
 import { xmark } from "../../../../../assets/img";
+import { useDispatch } from "react-redux";
+import { closeModal } from "../../../../../store/usersSlise";
 
 export const SuccesfullDataLoad = ({ SetSuccesLoading }) => {
+  const dispatch =useDispatch()
   return (
     <div className={styles.body}>
       <div className={styles.content}>
@@ -11,7 +14,7 @@ export const SuccesfullDataLoad = ({ SetSuccesLoading }) => {
           <div className={styles.text}>Хорошего настроения, эксперт!</div>
         </div>
         <div>
-          <button onClick={() => SetSuccesLoading(false)} className={styles.button}>
+          <button onClick={() => dispatch(closeModal())} className={styles.button}>
             <img src={xmark} alt="" srcset="" />
           </button>
         </div>
