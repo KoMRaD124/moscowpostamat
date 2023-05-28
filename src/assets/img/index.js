@@ -29,10 +29,12 @@ import taskArchive from "./task/taskArchive.svg"
 import taskOpenBlack from "./task/taskOpenBlack.svg"
 import taskInProgressBlack from "./task/taskInProgressBlack.svg"
 import taskArchiveBlack from "./task/taskArchiveBlack.svg"
+import taskCompleted from "./task/taskCompleted.svg"
 import video from "./video.svg"
 
 export {
     video,
+    taskCompleted,
     taskOpenBlack,
     taskInProgressBlack,
     taskArchiveBlack,

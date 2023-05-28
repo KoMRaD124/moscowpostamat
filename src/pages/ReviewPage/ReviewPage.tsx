@@ -8,6 +8,7 @@ import {observer} from "mobx-react-lite";
 import axios from "axios";
 import {domain} from "../../constants/config";
 import {IReview} from "../../mobxStore/reviewsStore";
+import {ITask} from "../../mobxStore/tasksStore";
 
 export const ReviewPage = observer(() => {
     const navigate = useNavigate()
@@ -15,10 +16,17 @@ export const ReviewPage = observer(() => {
     const {id} = useParams()
 
     const [review, setReview] = useState<IReview>()
+    const [task, setTask] = useState<ITask>()
 
     const fetchReview = async () => {
         const res = await axios.get(`${domain}/api/admin/reviews/${id}`)
         setReview(res.data)
+
+        try {
+            const taskRes = await axios.get(`${domain}/api/admin/tasks/T-${id}`)
+            setTask(taskRes.data)
+        } catch (e) {
+        }
     }
 
     useEffect(() => {
@@ -108,8 +116,14 @@ export const ReviewPage = observer(() => {
                                     </div>
                                 </div>
                             }
-                            {/*<div className={styles.taskHead}>Связанная задача</div>*/}
-                            {/*<div className={styles.task}>{taskId}</div>*/}
+                            {task &&
+                                <>
+                                    <div className={styles.taskHead}>Связанная задача</div>
+                                    <div className={styles.task}
+                                         onClick={() => navigate(`/tasks/${task.id}`)}
+                                    >{task.id}</div>
+                                </>
+                            }
                         </div>
                     </div>
                 </div>

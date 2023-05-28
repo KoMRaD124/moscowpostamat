@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import styles from "./TaskPage.module.scss";
-import {arrowBack} from "../../assets/img";
+import {arrowBack, taskCompleted} from "../../assets/img";
 import {Divider} from "../../components/common/Divider/Divider";
 import classNames from "classnames";
 import {useNavigate, useParams} from "react-router-dom";
@@ -29,7 +29,7 @@ export const TaskPage = observer(() => {
         return (
             <div className={styles.body}>
                 <div className={styles.header}>
-                    <button className={styles.buttonBack} onClick={() => navigate("/reviews")}>
+                    <button className={styles.buttonBack} onClick={() => navigate("/tasks")}>
                         <img src={arrowBack} alt="" srcSet=""/>
                     </button>
                     <div className={styles.headerText}>Загрузка ...</div>
@@ -41,7 +41,7 @@ export const TaskPage = observer(() => {
     return (
         <div className={styles.body}>
             <div className={styles.header}>
-                <button className={styles.buttonBack} onClick={() => navigate("/reviews")}>
+                <button className={styles.buttonBack} onClick={() => navigate("/tasks")}>
                     <img src={arrowBack} alt=""/>
                 </button>
                 <div className={styles.headerText}>Задача — {id} </div>
@@ -65,7 +65,9 @@ export const TaskPage = observer(() => {
                             <div className={styles.bottom}>
                                 <button className={classNames(
                                     styles.button, {
-                                        [styles.yellow]: task.status === "in_progress"
+                                        [styles.yellow]: task.status === "in_progress",
+                                        [styles.green]: task.status === "archive",
+                                        [styles.red]: task.status === "open"
                                     }
                                 )}
                                     onClick={() => {
@@ -86,6 +88,10 @@ export const TaskPage = observer(() => {
                                     {task.status === "in_progress" && "В работе"}
                                     {task.status === "archive" && "Решено"}
                                 </button>
+
+                                {task.status === "archive" &&
+                                    <img src={taskCompleted}/>
+                                }
                             </div>
                         </div>
 

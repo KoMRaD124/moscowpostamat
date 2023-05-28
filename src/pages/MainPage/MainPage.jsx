@@ -89,7 +89,7 @@ export const MainPage = () => {
   if (openTask) {
     openTaskArray = openTask.slice(0, 4);
   }
-  if (isLoading||openTask) {
+  if (isLoading || openTask) {
     return (
       <div className={styles.body}>
         <h2 className={styles.welcome}>Добро пожаловать, {userName}!</h2>

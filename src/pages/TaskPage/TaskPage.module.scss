@@ -392,6 +392,20 @@
       box-shadow: 0px 0px 8px #F3F09F;
     }
 
+    &.green {
+      background: #00B333;
+      border: 2px solid #00B333;
+      box-shadow: 0px 0px 12px rgba(157, 174, 198, 0.65);
+      color: #FFFFFF;
+    }
+
+    &.red {
+      background: #F73619;
+      border: 2px solid #F73619;
+      box-shadow: 0px 0px 8px #F7C1C1;
+      color: #FFFFFF;
+    }
+
     &:hover {
       opacity: 0.8;
     }
