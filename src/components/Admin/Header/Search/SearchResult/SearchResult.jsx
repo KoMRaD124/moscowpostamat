@@ -65,7 +65,7 @@ export const SearchResult = observer(() => {
             onMouseLeave={handleLeave}
           >
             <p>
-              Посмотреть все комментарии ({searchStore.reviews.total_count})
+              Посмотреть все комментарии
             </p>{" "}
             <Arrow
               className={classNames({
@@ -94,7 +94,7 @@ export const SearchResult = observer(() => {
           <button className={styles.subHeadText}
           onMouseEnter={handleHoverTask}
           onMouseLeave={handleLeaveTask}>
-            <p>Посмотреть все задачи ({searchStore.tasks.total_count})</p>{" "}
+            <p>Посмотреть все задачи</p>{" "}
             <Arrow
                 className={classNames({
                   [styles.arrowActive]: isHoveredTask,
