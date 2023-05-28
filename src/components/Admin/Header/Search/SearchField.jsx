@@ -29,7 +29,7 @@ export const SearchField = observer(() => {
       .get(`${domain}/api/admin/tasks?search=${searchValue}`)
       .then((response) => {
         searchStore.tasks = response.data;
-        setSearchValue("")
+
         navigate("/search", { replace: true });
         searchStore.setIsActive(true)
       })
