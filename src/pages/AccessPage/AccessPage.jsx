@@ -5,11 +5,12 @@ import { Divider } from "../../components/common/Divider/Divider";
 import { UserCard } from "../../components/Admin/Access/UserCard/UserCard";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setUsers } from "../../store/usersSlise";
+import { setDelSuccesfull, setUsers } from "../../store/usersSlise";
 import { domain } from "../../constants/config";
 import { SuccesfullModal } from "../../components/Admin/Access/AccessScreens/Modal/SuccesfullModal";
 import { ErrorModal } from "../../components/Admin/Access/AccessScreens/Modal/Error";
 import { UserDel } from "../../components/Admin/Access/AccessScreens/Modal/userDel";
+import { DeleteScreenSuccesfull } from "../../components/Admin/Access/AccessScreens/DeleteScreenSuccesfull/DeleteScreenSuccesfull";
 
 
 export const AccessPage = () => {
@@ -17,6 +18,7 @@ export const AccessPage = () => {
   const successIsActive=useSelector((state)=>state.users.SuccesfullisActive)
   const ErrorisActive=useSelector((state)=>state.users.ErrorisActive)
   const UserDelete=useSelector((state)=>state.users.UserDel)
+  const UserDelSuccesfull=useSelector((state)=>state.users.UserDelSuccesfull)
   const currentRole=useSelector((state)=>state.auth.auth.role)
   const delEmail=useSelector((state)=>state.users.delEmail)
   const dispatch = useDispatch();
@@ -29,6 +31,7 @@ export const AccessPage = () => {
       .get(`${domain}/api/admin/users`)
       .then((response) => {
         dispatch(setUsers(response.data));
+        dispatch(setDelSuccesfull())
       })
       .catch((error) => {
         console.log("запрос пользователей " + error);
@@ -68,6 +71,7 @@ export const AccessPage = () => {
       {successIsActive?<SuccesfullModal/>:<></>}
       {ErrorisActive?<ErrorModal/>:<></>}
       {UserDelete?<UserDel email={delEmail}/>:<></>}
+      {UserDelSuccesfull?<DeleteScreenSuccesfull email={delEmail}/>:<></>}
     </div>
   );
 };
