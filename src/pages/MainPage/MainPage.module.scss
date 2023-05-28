@@ -110,9 +110,29 @@
   letter-spacing: 0.01em;
   color: $color-black-nonactive;
   &:hover {
-    background: #d5dde9;
-    color: $color-black;
+    /* background: #d5dde9; */
+    color: #525971;
   }
+}
+.dataButtonWeek{
+  padding: 4px 16px;
+  border-radius: 4px;
+  font-family: "TT Firs Neue";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 23px;
+  letter-spacing: 0.01em;
+  color: $color-black-nonactive;
+  margin-left: -16px;
+  &:hover {
+    /* background: #d5dde9; */
+    color: #525971;
+  }
+}
+.dataButtonActive{
+  background: #d5dde9;
+  color: #2F3342;
 }
 .averageShowAll {
   width: 100%;
@@ -128,6 +148,9 @@
   margin-top: 106px;
   letter-spacing: 0.01em;
   color: $color-black-nonactive;
+  &:hover{
+    color: $color-black;
+  }
 }
 .tasksShowAll {
   width: 100%;
@@ -143,6 +166,14 @@
   margin-top: 34px;
   letter-spacing: 0.01em;
   color: $color-black-nonactive;
+  &:hover{
+    color: $color-black;
+  }
+}
+.arrowTaskActive * {
+ 
+    fill: #F73619;
+
 }
 .taskInProgress {
   padding-left: 24px;

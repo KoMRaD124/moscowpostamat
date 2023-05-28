@@ -26,7 +26,7 @@ export const Login = () => {
       .post(`${domain}/api/admin/login`, data)
       .then((response) => {
         dispatch(setAuth(response.data));
-        navigate("/home");
+        navigate("/Home");
         setIsError(false)
       })
       .catch((error) => {
@@ -36,7 +36,7 @@ export const Login = () => {
   };
   React.useEffect(() => {
     if (isAuthenticated) {
-      navigate("/", { replace: true });
+      navigate("/Home", { replace: true });
     }
   }, []);
   return (

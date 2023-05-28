@@ -18,8 +18,9 @@ export const SearchField = observer(() => {
       .then((response) => {
         searchStore.reviews = response.data;
         navigate("/search", { replace: true });
+        setSearchValue("")
         searchStore.setIsActive(true)
-        /* setIsActive(true); */
+        
       })
 
       .catch((error) => {
@@ -29,6 +30,8 @@ export const SearchField = observer(() => {
       .get(`${domain}/api/admin/tasks?search=${searchValue}`)
       .then((response) => {
         searchStore.tasks = response.data;
+        setSearchValue("")
+
         navigate("/search", { replace: true });
         searchStore.setIsActive(true)
       })
@@ -41,22 +44,16 @@ export const SearchField = observer(() => {
     <>
       <div style={{ position: "relative", with: "100%" }}>
         <input
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={(e) => {setSearchValue(e.target.value);}}
+          value={searchValue}
           className={styles.input}
           type="text"
           placeholder="ID комментария или задачи, адрес постамата, телефон клиента"
         />
         <button
+          disabled={searchValue.length===0}
           onClick={() => searchFetch()}
-          style={{
-            position: "absolute",
-            top: "50%",
-            right: "1px",
-            transform: "translateY(-50%)",
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-          }}
+          className={styles.button}
         >
           <img src={searchButton} alt="" />
         </button>
