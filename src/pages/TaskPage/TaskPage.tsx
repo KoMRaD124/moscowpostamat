@@ -50,6 +50,45 @@ export const TaskPage = observer(() => {
             <div className={styles.content}>
                 <div className={styles.leftSide}>
                     <div className={styles.userData}>
+                        <div className={styles.headText}>Задача</div>
+                        <div className={styles.taskInfo}>
+                            <div className={styles.sourceContainer}>
+                                <div className={styles.sourceHeader}>Дата создания задачи</div>
+                                <div className={styles.sourceText}>{task.created_at}</div>
+                            </div>
+                            <Divider width={1}/>
+                            <div className={styles.sourceContainer}>
+                                <div className={styles.sourceHeader}>Тип проблемы</div>
+                                <div className={styles.sourceText}>{task.name}</div>
+                            </div>
+
+                            <div className={styles.bottom}>
+                                <button className={classNames(
+                                    styles.button, {
+                                        [styles.yellow]: task.status === "in_progress"
+                                    }
+                                )}
+                                    onClick={() => {
+                                        if (task?.status === "open") {
+                                            task.status = "in_progress"
+                                        } else if (task?.status === "in_progress") {
+                                            task.status = "archive"
+                                        } else if (task?.status === "archive") {
+                                            task.status = "in_progress"
+                                        }
+                                        axios.post(`${domain}/api/admin/tasks/${task.id}/set-status`, {
+                                            status: task.status
+                                        })
+                                        setTask({...task})
+                                    }}
+                                >
+                                    {task.status === "open" && "Решить"}
+                                    {task.status === "in_progress" && "В работе"}
+                                    {task.status === "archive" && "Решено"}
+                                </button>
+                            </div>
+                        </div>
+
                         <div className={styles.headText}>Данные пользователя</div>
                         <div className={styles.userDataConteiner}>
                             <div className={styles.userDataContent}>
@@ -60,11 +99,6 @@ export const TaskPage = observer(() => {
                             </div>
                         </div>
 
-                        <div className={styles.commentDataHead}>Дата комментария</div>
-                        <div className={styles.commentDataContainer}>
-                            <div className={styles.dateText}>Получен</div>
-                            <div className={styles.date}>{task.created_at}</div>
-                        </div>
                         <div className={styles.postamatHead}>Постамат</div>
                         <div className={styles.postamatContainer}>
                             <div className={styles.postamatId}>
@@ -88,12 +122,12 @@ export const TaskPage = observer(() => {
                                     Оценка <br/> пользователя
                                 </div>
                             </div>
-                            <Divider/>
+                            <Divider width={1}/>
                             <div className={styles.sourceContainer}>
                                 <div className={styles.sourceHeader}>Источник</div>
                                 <div className={styles.sourceText}>{task.review.source_name}</div>
                             </div>
-                            <Divider/>
+                            <Divider width={1}/>
                             <div className={styles.commentContainer}>
                                 <div className={styles.commentHeader}>
                                     Содержимое комментария:
@@ -106,8 +140,10 @@ export const TaskPage = observer(() => {
                                     {task.review.categories.map((el) => <div className={styles.tag} key={el}>{el}</div>)}
                                 </div>
                             </div>
-                            {/*<div className={styles.taskHead}>Связанная задача</div>*/}
-                            {/*<div className={styles.task}>{taskId}</div>*/}
+                            <div className={styles.taskHead}>Связанный отзыв</div>
+                            <div className={styles.task}
+                                onClick={() => navigate(`/reviews/${task?.review.id}`)}
+                            >№{task.review.id}</div>
                         </div>
                     </div>
                 </div>

@@ -26,7 +26,7 @@ export const Login = () => {
       .post(`${domain}/api/admin/login`, data)
       .then((response) => {
         dispatch(setAuth(response.data));
-        navigate("/Home");
+        navigate("/");
         setIsError(false)
       })
       .catch((error) => {
@@ -36,7 +36,7 @@ export const Login = () => {
   };
   React.useEffect(() => {
     if (isAuthenticated) {
-      navigate("/Home", { replace: true });
+      navigate("/", { replace: true });
     }
   }, []);
   return (
@@ -74,7 +74,7 @@ export const Login = () => {
           </div>
           {isError?<div className={styles.pasText}>Неправильная почта <br /> или пароль</div>:<></>}
         </div>
-        
+
       </div>
     </div>
   );

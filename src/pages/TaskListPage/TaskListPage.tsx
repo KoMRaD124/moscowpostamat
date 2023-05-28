@@ -172,7 +172,7 @@ export const TaskListPage = observer(() => {
                                     onClick={() => tasksStore.statusFilter = "open"}
                             >
                                 <img src={taskOpenBlack}/>
-                                Требует решения
+                                Требуют решения
                             </button>
                             <button className={classNames(styles.tab, styles.tabGreen, {
                                 [styles.active]: tasksStore.statusFilter === "archive"

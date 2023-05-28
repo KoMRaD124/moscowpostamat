@@ -10,7 +10,7 @@ import {TaskListPage} from "../pages/TaskListPage/TaskListPage";
 
 export const navRoutes = [
     {
-        path: "/Home",
+        path: "/",
         element: <MainPage/>,
         icon: main,
         name: "Главная"

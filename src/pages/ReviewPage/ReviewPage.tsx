@@ -88,24 +88,26 @@ export const ReviewPage = observer(() => {
                                     Оценка <br/> пользователя
                                 </div>
                             </div>
-                            <Divider/>
+                            <Divider width={1}/>
                             <div className={styles.sourceContainer}>
                                 <div className={styles.sourceHeader}>Источник</div>
                                 <div className={styles.sourceText}>{review.source_name}</div>
                             </div>
-                            <Divider/>
+                            <Divider width={1}/>
                             <div className={styles.commentContainer}>
                                 <div className={styles.commentHeader}>
                                     Содержимое комментария:
                                 </div>
                                 <div className={styles.commentText}>{review.comment}</div>
                             </div>
-                            <div className={styles.tagsContainer}>
-                                <div className={styles.tagsHeader}>Категории</div>
-                                <div className={styles.tagsArray}>
-                                    {review.categories.map((el) => <div className={styles.tag} key={el}>{el}</div>)}
+                            {review.categories.length > 0 &&
+                                <div className={styles.tagsContainer}>
+                                    <div className={styles.tagsHeader}>Категории</div>
+                                    <div className={styles.tagsArray}>
+                                        {review.categories.map((el) => <div className={styles.tag} key={el}>{el}</div>)}
+                                    </div>
                                 </div>
-                            </div>
+                            }
                             {/*<div className={styles.taskHead}>Связанная задача</div>*/}
                             {/*<div className={styles.task}>{taskId}</div>*/}
                         </div>
