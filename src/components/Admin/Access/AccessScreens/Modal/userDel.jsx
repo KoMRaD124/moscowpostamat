@@ -21,7 +21,6 @@ export const UserDel = ({email}) => {
               onClick={() => dispatch(closeModal())}
               src={xmark}
               alt=""
-              srcset=""
             />
           </button>
         </div>

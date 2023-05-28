@@ -21,7 +21,8 @@ code {
 body {
   overflow: overlay;
   background: white !important;
-  color: #2f3342;
+  color: #2F3342;
+  font-family: 'TT Firs Neue';
 }
 
 a {
@@ -34,6 +35,7 @@ button {
   border: none;
   cursor: pointer;
   background: none;
+  color: #2F3342;
 }
 
 button:disabled {

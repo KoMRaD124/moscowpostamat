@@ -19,12 +19,10 @@ function App() {
       .post(`${domain}/api/admin/auth`)
       .then((response) => {
         dispatch(setAuth(response.data));
-        console.log(response.data);
         /* navigate("/*"); */
       })
       .catch((error) => {
         navigate("/login");
-        console.log("ауф запрос "+error);
       });
   }, []);
   return (

@@ -1,10 +1,9 @@
 @import "src/styles/vars";
 .body {
-  margin: 0 40px;
+  padding: 40px;
 }
 .header {
   display: flex;
-  margin-top: 40px;
   margin-bottom: 20px;
   align-items: center;
 }
@@ -315,6 +314,14 @@
   border: 1px solid #2f3342;
   border-radius: 4px;
   padding: 4px 8px;
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  text-transform: lowercase;
+  color: #2F3342;
 }
 .taskHead {
   font-family: "TT Firs Neue";
@@ -324,7 +331,7 @@
   line-height: 22px;
   letter-spacing: 0.01em;
   color: #2f3342;
-  margin-top: 106px;
+  margin-top: 28px;
 }
 
 .task {
@@ -336,7 +343,71 @@
   padding: 10px;
   margin-top: 16px;
   color: #FFFFFF;
+
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
 }
 .rightSide{
     margin-bottom: 40px;
+}
+
+.taskInfo {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  padding: 28px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 12px rgba(157, 174, 198, 0.65);
+  border-radius: 16px;
+
+  .sourceContainer:first-child {
+    margin-top: 0;
+  }
+
+  .bottom {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .button {
+    width: 158px;
+    height: 56px;
+    left: 28px;
+    top: 160px;
+    border-radius: 8px;
+    font-family: 'TT Firs Neue';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 120%;
+    text-align: center;
+
+    &.yellow {
+      color: #2F3342;
+      background: #F0BC00;
+      border: 2px solid #F0BC00;
+      box-shadow: 0px 0px 8px #F3F09F;
+    }
+
+    &.green {
+      background: #00B333;
+      border: 2px solid #00B333;
+      box-shadow: 0px 0px 12px rgba(157, 174, 198, 0.65);
+      color: #FFFFFF;
+    }
+
+    &.red {
+      background: #F73619;
+      border: 2px solid #F73619;
+      box-shadow: 0px 0px 8px #F7C1C1;
+      color: #FFFFFF;
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 }

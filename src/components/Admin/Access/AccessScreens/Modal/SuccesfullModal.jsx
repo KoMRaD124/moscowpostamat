@@ -11,14 +11,14 @@ export const SuccesfullModal = ({ isActive }) => {
       <div className={styles.content} onClick={(e) => e.stopPropagation()}>
         <div className={styles.container}>
           <div className={styles.containerMain}>
-            <div className={styles.img}><img src={success} alt="" srcSet="" /></div>
+            <div className={styles.img}><img src={success} alt="" /></div>
             <div className={styles.header}>Успешно добавлен!</div>
             <div className={styles.text}>
               Сообщение с паролем было отправлено на указанную почту
             </div>
           </div>
           <button className={styles.containerButton}>
-            <img onClick={() => dispatch(closeModal())} src={xmark} alt="" srcset="" />
+            <img onClick={() => dispatch(closeModal())} src={xmark} alt="" />
           </button>
         </div>
       </div>

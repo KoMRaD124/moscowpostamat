@@ -9,6 +9,7 @@ export const SideBar = () => {
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
+    console.log(selectedFile);
     handleUpload(selectedFile);
   };
 
@@ -16,6 +17,9 @@ export const SideBar = () => {
     if (file) {
       const formData = new FormData();
       formData.append("file", file);
+
+      // TODO: Just for testing
+      formData.append("limit", "5000");
 
       axios
         .post(`${domain}/api/admin/reviews/import-dataset`, formData)
@@ -39,7 +43,7 @@ export const SideBar = () => {
     <div className={styles.body}>
       <div className={styles.content}>
         <div className={styles.hiddenInput}></div>
-        <img className={styles.logo} src={logoWhite} alt="" srcSet="" />
+        <img className={styles.logo} src={logoWhite} alt=""/>
         <LeftMenu />
         <input type="file" ref={fileInputRef} onChange={handleFileChange} className={styles.hi} />
 

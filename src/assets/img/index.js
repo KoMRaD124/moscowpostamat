@@ -20,5 +20,50 @@ import error from "./error.svg"
 import xmark from "./Xmark.svg"
 import arrowBack from "./ArrowBack.svg"
 import arrowUp from "./arrowUp.svg"
+import postamats from "./Postamats.svg"
+import filter from "./filter.svg"
+import sort from "./Sort.svg"
+import taskOpen from "./task/taskOpen.svg"
+import taskInProgress from "./task/taskInProgress.svg"
+import taskArchive from "./task/taskArchive.svg"
+import taskOpenBlack from "./task/taskOpenBlack.svg"
+import taskInProgressBlack from "./task/taskInProgressBlack.svg"
+import taskArchiveBlack from "./task/taskArchiveBlack.svg"
+import taskCompleted from "./task/taskCompleted.svg"
 import video from "./video.svg"
-export{loaderWhiteSvg,video,loaderRedSvg,arrowUp,loginPageBG,logoRed,showPass,dontShowPass,logoWhite,Access,Analytics,comments,Logout,main,Tasks,Plus,Delete,Arrow,searchButton,success,error,xmark,arrowBack}
+
+export {
+    video,
+    taskCompleted,
+    taskOpenBlack,
+    taskInProgressBlack,
+    taskArchiveBlack,
+    taskOpen,
+    taskInProgress,
+    taskArchive,
+    sort,
+    filter,
+    loaderWhiteSvg,
+    loaderRedSvg,
+    arrowUp,
+    loginPageBG,
+    logoRed,
+    showPass,
+    dontShowPass,
+    logoWhite,
+    Access,
+    Analytics,
+    comments,
+    Logout,
+    main,
+    Tasks,
+    Plus,
+    Delete,
+    Arrow,
+    searchButton,
+    success,
+    error,
+    xmark,
+    arrowBack,
+    postamats
+}

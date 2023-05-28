@@ -1,41 +1,48 @@
 import React from "react";
-import { MainPage } from "../pages/MainPage/MainPage";
-import { AccessPage } from "../pages/AccessPage/AccessPage";
-import { TasksPage } from "../pages/TasksPage/TasksPage";
-import { CommentsPage } from "../pages/CommentsPage/CommentsPage";
-import { AnalyticsPage } from "../pages/AnalyticsPage/AnalyticsPage";
-import { main,comments,Tasks,Analytics,Access } from "../assets/img";
+import {MainPage} from "../pages/MainPage/MainPage";
+import {AccessPage} from "../pages/AccessPage/AccessPage";
+import {ReviewListPage} from "../pages/ReviewListPage/ReviewListPage";
+import {AnalyticsPage} from "../pages/AnalyticsPage/AnalyticsPage";
+import {Access, Analytics, comments, main, postamats, Tasks} from "../assets/img";
+import {PostamatListPage} from "../pages/PostamatListPage/PostamatListPage";
+import {TaskListPage} from "../pages/TaskListPage/TaskListPage";
 
 
 export const navRoutes = [
-  {
-    path: "/",
-    element: <MainPage />,
-    icon: main,
-    name:"Главная"
-  },
-  {
-    path: "/Comments",
-    element: <CommentsPage />,
-    icon: comments,
-    name:"Комментарии"
-  },
-  {
-    path: "/Tasks",
-    element: <TasksPage/>,
-    icon: Tasks,
-    name:"Задачи"
-  },
-  {
-    path: "/Analytics",
-    element: <AnalyticsPage/>,
-    icon: Analytics,
-    name:"Аналитика"
-  },
-  {
-    path: "/Access",
-    element: <AccessPage />,
-    icon: Access,
-    name:"Доступы"
-  },
+    {
+        path: "/",
+        element: <MainPage/>,
+        icon: main,
+        name: "Главная"
+    },
+    {
+        path: "/postamats",
+        element: <PostamatListPage/>,
+        icon: postamats,
+        name: "Постаматы"
+    },
+    {
+        path: "/reviews",
+        element: <ReviewListPage/>,
+        icon: comments,
+        name: "Отзывы"
+    },
+    {
+        path: "/tasks",
+        element: <TaskListPage/>,
+        icon: Tasks,
+        name: "Задачи"
+    },
+    {
+        path: "/analytics",
+        element: <AnalyticsPage/>,
+        icon: Analytics,
+        name: "Аналитика"
+    },
+    {
+        path: "/Access",
+        element: <AccessPage/>,
+        icon: Access,
+        name: "Доступы"
+    },
 ];

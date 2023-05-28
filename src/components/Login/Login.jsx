@@ -26,8 +26,8 @@ export const Login = () => {
       .post(`${domain}/api/admin/login`, data)
       .then((response) => {
         dispatch(setAuth(response.data));
-        navigate("/Home");
-        setIsError(false);
+        navigate("/");
+        setIsError(false)
       })
       .catch((error) => {
         console.error(error);
@@ -36,13 +36,13 @@ export const Login = () => {
   };
   React.useEffect(() => {
     if (isAuthenticated) {
-      navigate("/Home", { replace: true });
+      navigate("/", { replace: true });
     }
   }, []);
   return (
     <div className={styles.body}>
       <div className={styles.content}>
-        <img src={logoRed} alt="" srcset="" />
+        <img src={logoRed} alt="" />
         <form action="" onSubmit={(e) => e.preventDefault()}>
           <div className={styles.login}>
             <div className={styles.inputText}>Почта</div>
@@ -110,7 +110,7 @@ export const Login = () => {
               Войти
             </MyButton>
           </div>
-       
+
           {isError?<div className={styles.pasText}>Неправильная почта <br /> или пароль</div>:<></>}
         </div> */}
       </div>
