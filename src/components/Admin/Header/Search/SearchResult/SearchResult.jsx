@@ -41,7 +41,7 @@ export const SearchResult = observer(() => {
   return (
     <div className={styles.body}>
       <header className={styles.header}>
-        <h2 className={styles.head}>Результаты поиска</h2>{" "}
+        <div className={styles.head}>Результаты поиска</div>{" "}
         <button className={styles.button} onClick={() => navigate(-1)}>
           <img src={xmark} alt="" srcset="" />
         </button>
