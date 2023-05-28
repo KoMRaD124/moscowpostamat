@@ -38,6 +38,9 @@
   margin-top: 8px;
   display: flex;
   justify-content: space-between;
+  &:hover{
+    color: #2F3342;
+  }
 }
 .cardBlock {
   padding-top: 24px;
@@ -66,4 +69,7 @@
   letter-spacing: 0.01em;
   color: #9da1ae;
   padding-top: 28px;
+}
+.arrowActive * {
+  fill: #F73619;
 }

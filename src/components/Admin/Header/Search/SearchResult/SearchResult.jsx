@@ -3,13 +3,31 @@ import styles from "./SearchResult.module.scss";
 import { observer } from "mobx-react-lite";
 import { SearchStore, searchStore } from "../../../../../mobxStore/store";
 import { Divider } from "../../../../common/Divider/Divider";
-import { Arrow, xmark } from "../../../../../assets/img";
+import { xmark } from "../../../../../assets/img";
+import { ReactComponent as Arrow } from "../../../../../assets/img/Arrow.svg";
 import { CommentCard } from "./CommentCard/CommentCard";
 import { SearchTaskCard } from "./SearchTaskCard/SearchTaskCard";
 import { useNavigate } from "react-router-dom";
+import classNames from "classnames";
 
 export const SearchResult = observer(() => {
   const navigate = useNavigate();
+  const [isHoveredTask, setIsHoveredTask] = React.useState(false);
+  const handleHoverTask = () => {
+    setIsHoveredTask(true);
+  };
+
+  const handleLeaveTask = () => {
+    setIsHoveredTask(false);
+  };
+  const [isHovered, setIsHovered] = React.useState(false);
+  const handleHover = () => {
+    setIsHovered(true);
+  };
+
+  const handleLeave = () => {
+    setIsHovered(false);
+  };
   let reviewsArray = [];
   let tasksArray = [];
   if (Object.keys(searchStore.reviews).length > 0) {
@@ -19,6 +37,7 @@ export const SearchResult = observer(() => {
     tasksArray = searchStore.tasks.result.slice(0, 3);
     console.log({ tasksArray });
   }
+
   return (
     <div className={styles.body}>
       <header className={styles.header}>
@@ -29,7 +48,9 @@ export const SearchResult = observer(() => {
       </header>
       <div className={styles.divider}></div>
       {!reviewsArray[0] && !tasksArray[0] ? (
-        <div className={styles.wrongSearch}>Ничего не нашлось:( <br /> Попробуйте изменить вариант запроса... </div>
+        <div className={styles.wrongSearch}>
+          Ничего не нашлось:( <br /> Попробуйте изменить вариант запроса...{" "}
+        </div>
       ) : (
         <></>
       )}
@@ -38,11 +59,19 @@ export const SearchResult = observer(() => {
       ) : (
         <>
           <div className={styles.subHead}>Комментарии</div>
-          <button className={styles.subHeadText}>
+          <button
+            className={styles.subHeadText}
+            onMouseEnter={handleHover}
+            onMouseLeave={handleLeave}
+          >
             <p>
               Посмотреть все комментарии ({searchStore.reviews.total_count})
             </p>{" "}
-            <img src={Arrow} alt="" srcset="" />
+            <Arrow
+              className={classNames({
+                [styles.arrowActive]: isHovered,
+              })}
+            />
           </button>
           <div className={styles.cardBlock}>
             {reviewsArray.map((el) => (
@@ -62,9 +91,15 @@ export const SearchResult = observer(() => {
       ) : (
         <>
           <div className={styles.subHead}>Задачи</div>
-          <button className={styles.subHeadText}>
+          <button className={styles.subHeadText}
+          onMouseEnter={handleHoverTask}
+          onMouseLeave={handleLeaveTask}>
             <p>Посмотреть все задачи ({searchStore.tasks.total_count})</p>{" "}
-            <img src={Arrow} alt="" srcset="" />
+            <Arrow
+                className={classNames({
+                  [styles.arrowActive]: isHoveredTask,
+                })}
+              />
           </button>
           <div className={styles.cardBlock}>
             {tasksArray.map((el) => (
