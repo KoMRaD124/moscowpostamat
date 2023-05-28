@@ -20,4 +20,34 @@ import error from "./error.svg"
 import xmark from "./Xmark.svg"
 import arrowBack from "./ArrowBack.svg"
 import arrowUp from "./arrowUp.svg"
-export{loaderWhiteSvg,loaderRedSvg,arrowUp,loginPageBG,logoRed,showPass,dontShowPass,logoWhite,Access,Analytics,comments,Logout,main,Tasks,Plus,Delete,Arrow,searchButton,success,error,xmark,arrowBack}
+import postamats from "./Postamats.svg"
+import filter from "./filter.svg"
+import sort from "./Sort.svg"
+
+export {
+    sort,
+    filter,
+    loaderWhiteSvg,
+    loaderRedSvg,
+    arrowUp,
+    loginPageBG,
+    logoRed,
+    showPass,
+    dontShowPass,
+    logoWhite,
+    Access,
+    Analytics,
+    comments,
+    Logout,
+    main,
+    Tasks,
+    Plus,
+    Delete,
+    Arrow,
+    searchButton,
+    success,
+    error,
+    xmark,
+    arrowBack,
+    postamats
+}

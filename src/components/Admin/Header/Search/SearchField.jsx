@@ -44,7 +44,7 @@ export const SearchField = observer(() => {
           onChange={(e) => setSearchValue(e.target.value)}
           className={styles.input}
           type="text"
-          placeholder="№ комментария, почта, телефон, адрес постамата "
+          placeholder="ID комментария или задачи, адрес постамата, телефон клиента"
         />
         <button
           onClick={() => searchFetch()}

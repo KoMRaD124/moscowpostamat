@@ -34,6 +34,10 @@ const periodOptions = [
 
 export const AnalyticsPage = observer(() => {
     useEffect(() => {
+        postamatStore.clearSelection()
+    }, [])
+
+    useEffect(() => {
         analyticsStore.fetchRatingCountData()
         analyticsStore.fetchAvgRating()
         analyticsStore.fetchRatingSeries()

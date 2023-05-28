@@ -123,6 +123,16 @@ class PostamatStore {
         ).slice(0, 5)
     }
 
+    get filteredPostamats() {
+        if (this.selectedPostamat) {
+            return [this.selectedPostamat]
+        }
+        if (this.selectedDistrictIds.length) {
+            return this.postamats?.filter(p => this.selectedDistrictIds.includes(p.district_id))
+        }
+        return this.postamats
+    }
+
     async fetchRegions() {
         const res = await axios.get(`${domain}/api/admin/regions`)
         this.regions = res.data

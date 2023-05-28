@@ -2,9 +2,10 @@ import React from "react";
 import { MainPage } from "../pages/MainPage/MainPage";
 import { AccessPage } from "../pages/AccessPage/AccessPage";
 import { TasksPage } from "../pages/TasksPage/TasksPage";
-import { CommentsPage } from "../pages/CommentsPage/CommentsPage";
+import { ReviewListPage } from "../pages/ReviewListPage/ReviewListPage";
 import { AnalyticsPage } from "../pages/AnalyticsPage/AnalyticsPage";
-import { main,comments,Tasks,Analytics,Access } from "../assets/img";
+import { main,comments,Tasks,Analytics,Access,postamats } from "../assets/img";
+import {PostamatListPage} from "../pages/PostamatListPage/PostamatListPage";
 
 
 export const navRoutes = [
@@ -15,10 +16,16 @@ export const navRoutes = [
     name:"Главная"
   },
   {
-    path: "/Comments",
-    element: <CommentsPage />,
+    path: "/postamats",
+    element: <PostamatListPage />,
+    icon: postamats,
+    name:"Постаматы"
+  },
+  {
+    path: "/reviews",
+    element: <ReviewListPage />,
     icon: comments,
-    name:"Комментарии"
+    name:"Отзывы"
   },
   {
     path: "/Tasks",
