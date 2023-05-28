@@ -4,57 +4,43 @@ import {domain} from "../constants/config";
 import {sources} from "../constants/sources";
 import {categories} from "../constants/categories";
 import {postamatStore} from "./postamatStore";
+import {IReview} from "./reviewsStore";
 
-export interface IReview {
-    id: number,
-    comment: string,
-    rating: number,
-    date: string,
-    source_id: number,
-    source_name: string,
-    postamat_id: string,
-    postamat_address: string,
-    user_name: string,
-    user_phone: string,
-    categories: string[],
-    category_ids: number[]
+interface ITask {
+    id: string,
+    name: string,
+    created_at: string,
+    status: "open" | "in_progress" | "archive",
+    review: IReview
 }
 
 export const sortOptions = [
     {
         name: "Сначала новые",
-        value: "-date"
+        value: "-created_at"
     },
     {
         name: "Сначала старые",
-        value: "date"
-    },
-    {
-        name: "Сначала с наименьшей оценкой",
-        value: "rating"
-    },
-    {
-        name: "Сначала с наибольшей оценкой",
-        value: "-rating"
+        value: "created_at"
     }
 ]
 
-class ReviewsStore {
+class TasksStore {
     constructor() {
         makeAutoObservable(this)
     }
 
-    reviews?: IReview[]
-    ratingFilter = "all"
+    tasks?: ITask[]
+    statusFilter = "open"
 
-    selectedReview?: IReview
+    selectedTask?: ITask
     selectedCategoryIds: number[] = []
     selectedSourceIds: number[] = []
     searchValue = ""
     sortOptionValue = sortOptions[0].value
 
-    getReviewById(id: number) {
-        return this.reviews?.find(r => r.id === id)
+    getTaskById(id: string) {
+        return this.tasks?.find(r => r.id === id)
     }
 
     isCategorySelected(id: number) {
@@ -74,7 +60,7 @@ class ReviewsStore {
     }
 
     clearSelection() {
-        this.selectedReview = undefined
+        this.selectedTask = undefined
         this.selectedSourceIds = []
         this.selectedCategoryIds = []
     }
@@ -108,21 +94,18 @@ class ReviewsStore {
         return sources.find(c => c.id === id)
     }
 
-    get filteredReviews() {
-        if (this.selectedReview) {
-            return [this.selectedReview]
+    get filteredTasks() {
+        if (this.selectedTask) {
+            return [this.selectedTask]
         }
-        return this.reviews
+        return this.tasks
     }
 
     get appliedSettingsCount() {
         let count = 0
-        if (this.selectedReview) {
+        if (this.selectedTask) {
             count++
         } else {
-            if (this.ratingFilter !== "all") {
-                count++
-            }
             if (this.selectedCategoryIds.length) {
                 count += this.selectedCategoryIds.length
             }
@@ -141,28 +124,18 @@ class ReviewsStore {
     }
 
     get searchOptions() {
-        return this.reviews?.filter(
+        return this.tasks?.filter(
             r => r.id.toString().includes(this.searchValue.replaceAll("№", ""))
         ).slice(0, 5)
     }
 
-    async fetchReviews() {
-        let q = `${domain}/api/admin/reviews?limit=100`;
+    async fetchTasks() {
+        let q = `${domain}/api/admin/tasks?limit=100`;
 
-        if (this.ratingFilter === "5-4") {
-            q += `&min_rating=4&max_rating=5`
-        } else if (this.ratingFilter === "3") {
-            q += `&rating=3`
-        } else if (this.ratingFilter === "2-1") {
-            q += `&min_rating=1&max_rating=2`
-        }
+        q += `&status=${this.statusFilter}`
 
         if (this.selectedCategoryIds.length) {
             q += `&category_ids=${this.selectedCategoryIds.join(",")}`
-        }
-
-        if (this.selectedSourceIds.length) {
-            q += `&source_ids=${this.selectedSourceIds.join(",")}`
         }
 
         if (postamatStore.selectedPostamat) {
@@ -177,8 +150,8 @@ class ReviewsStore {
 
         const res = await axios.get(q)
 
-        this.reviews = res.data.result
+        this.tasks = res.data.result
     }
 }
 
-export const reviewsStore = new ReviewsStore()
+export const tasksStore = new TasksStore()

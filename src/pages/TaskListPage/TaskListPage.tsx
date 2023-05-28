@@ -4,25 +4,20 @@ import styles from "./TaskListPage.module.scss"
 import chevronIcon from "../../assets/img/select/chevron.svg"
 import {postamatStore} from "../../mobxStore/postamatStore";
 import xMark from "../../assets/img/Xmark.svg";
-import {reviewsStore, sortOptions} from "../../mobxStore/reviewsStore";
-import {filter} from "../../assets/img";
+import {tasksStore, sortOptions} from "../../mobxStore/tasksStore";
+import {
+    filter,
+    taskArchive,
+    taskArchiveBlack,
+    taskInProgress,
+    taskInProgressBlack,
+    taskOpen,
+    taskOpenBlack
+} from "../../assets/img";
 import classNames from "classnames";
-import {FilterReviews} from "../../components/reviews/FilterReviews/FilterReviews";
+import {FilterTasks} from "../../components/tasks/FilterTasks/FilterTasks";
 import {Sort} from "../../components/common/Sort/Sort";
-
-import * as XLSX from 'xlsx';
 import {useNavigate} from "react-router-dom";
-
-function exportToExcel(jsonData: any) {
-    const workbook = XLSX.utils.book_new();
-    const sheet = XLSX.utils.json_to_sheet(jsonData.map((d: any) => ({
-        ...d,
-        categories: d.categories.join(","),
-        category_ids: d.category_ids.join(",")
-    })));
-    XLSX.utils.book_append_sheet(workbook, sheet, 'Sheet1');
-    XLSX.writeFile(workbook, 'Отзывы.xlsx');
-}
 
 export const TaskListPage = observer(() => {
     const navigate = useNavigate()
@@ -32,17 +27,17 @@ export const TaskListPage = observer(() => {
     }, [])
 
     useEffect(() => {
-        reviewsStore.fetchReviews()
+        tasksStore.fetchTasks()
     }, [
-        reviewsStore.ratingFilter,
-        reviewsStore.selectedCategoryIds.length,
-        reviewsStore.selectedSourceIds.length,
-        reviewsStore.sortOptionValue,
+        tasksStore.statusFilter,
+        tasksStore.selectedCategoryIds.length,
+        tasksStore.selectedSourceIds.length,
+        tasksStore.sortOptionValue,
         postamatStore.selectedPostamat,
         postamatStore.selectedDistrictIds.length,
     ])
 
-    const isShowAppliedSettings = !!reviewsStore.appliedSettingsCount
+    const isShowAppliedSettings = !!tasksStore.appliedSettingsCount
 
     useEffect(() => {
         if (!isShowAppliedSettings) {
@@ -70,7 +65,7 @@ export const TaskListPage = observer(() => {
                         >
                             Выбранные настройки{" "}
                             <span className={styles.count}>
-                                ({reviewsStore.appliedSettingsCount})
+                                ({tasksStore.appliedSettingsCount})
                             </span>
                         </div>
                         <button
@@ -87,43 +82,32 @@ export const TaskListPage = observer(() => {
                         </button>
                         {isAppliedSettingsCardExpanded &&
                             <div className={styles.chips}>
-                                {reviewsStore.selectedReview ? (
+                                {tasksStore.selectedTask ? (
                                     <div className={styles.chip}>
-                                        Отзыв: №{reviewsStore.selectedReview.id}
+                                        Задача: {tasksStore.selectedTask.id}
                                         <button className={styles.clearButton}
                                                 onClick={() => {
-                                                    reviewsStore.selectedReview = undefined
+                                                    tasksStore.selectedTask = undefined
                                                 }}>
                                             <img src={xMark}/>
                                         </button>
                                     </div>
                                 ) : (
                                     <>
-                                        {reviewsStore.ratingFilter !== "all" &&
+                                        {!tasksStore.selectedTask && tasksStore.selectedCategoryIds.map(c_id =>
                                             <div className={styles.chip}>
-                                                Рейтинг: {reviewsStore.ratingFilter}
+                                                {tasksStore.getCategoryById(c_id)?.name}
                                                 <button className={styles.clearButton}
-                                                        onClick={() => {
-                                                            reviewsStore.ratingFilter = "all"
-                                                        }}>
-                                                    <img src={xMark}/>
-                                                </button>
-                                            </div>
-                                        }
-                                        {!reviewsStore.selectedReview && reviewsStore.selectedCategoryIds.map(c_id =>
-                                            <div className={styles.chip}>
-                                                {reviewsStore.getCategoryById(c_id)?.name}
-                                                <button className={styles.clearButton}
-                                                        onClick={() => reviewsStore.toggleCategory(c_id)}>
+                                                        onClick={() => tasksStore.toggleCategory(c_id)}>
                                                     <img src={xMark}/>
                                                 </button>
                                             </div>
                                         )}
-                                        {!reviewsStore.selectedReview && reviewsStore.selectedSourceIds.map(c_id =>
+                                        {!tasksStore.selectedTask && tasksStore.selectedSourceIds.map(c_id =>
                                             <div className={styles.chip}>
-                                                Источник: {reviewsStore.getSourceById(c_id)?.name}
+                                                Источник: {tasksStore.getSourceById(c_id)?.name}
                                                 <button className={styles.clearButton}
-                                                        onClick={() => reviewsStore.toggleSource(c_id)}>
+                                                        onClick={() => tasksStore.toggleSource(c_id)}>
                                                     <img src={xMark}/>
                                                 </button>
                                             </div>
@@ -161,106 +145,91 @@ export const TaskListPage = observer(() => {
         )
     }
 
-    const isReady = reviewsStore.reviews
-
-    const getRatingColor = (rating: number) => {
-        if (rating > 3) {
-            return "#00B333"
-        } else if (rating == 3) {
-            return "#F0BC00"
-        }
-        return "#FF1935"
-    }
+    const isReady = tasksStore.tasks
 
     const renderContent = () => {
         return (
             <div className={styles.layout}>
                 {isReady ? (
                     <>
-                        <div className={styles.header}>Отзывы</div>
+                        <div className={styles.header}>Задачи</div>
                         {getTopRow()}
                         <div className={styles.divider}/>
 
                         <div className={styles.tabsRow}>
-                            <button className={classNames(styles.tab, styles.tabAll, {
-                                [styles.active]: reviewsStore.ratingFilter === "all"
-                            })}
-                                    onClick={() => reviewsStore.ratingFilter = "all"}
-                            >
-                                Все
-                            </button>
-                            <button className={classNames(styles.tab, styles.tabGreen, {
-                                [styles.active]: reviewsStore.ratingFilter === "5-4"
-                            })}
-                                    onClick={() => reviewsStore.ratingFilter = "5-4"}
-                            >
-                                5-4
-                            </button>
+
                             <button className={classNames(styles.tab, styles.tabYellow, {
-                                [styles.active]: reviewsStore.ratingFilter === "3"
+                                [styles.active]: tasksStore.statusFilter === "in_progress"
                             })}
-                                    onClick={() => reviewsStore.ratingFilter = "3"}
+                                    onClick={() => tasksStore.statusFilter = "in_progress"}
                             >
-                                3
+                                <img src={taskInProgressBlack}/>
+                                В процессе
                             </button>
                             <button className={classNames(styles.tab, styles.tabRed, {
-                                [styles.active]: reviewsStore.ratingFilter === "2-1"
+                                [styles.active]: tasksStore.statusFilter === "open"
                             })}
-                                    onClick={() => reviewsStore.ratingFilter = "2-1"}
+                                    onClick={() => tasksStore.statusFilter = "open"}
                             >
-                                2-1
+                                <img src={taskOpenBlack}/>
+                                Требует решения
                             </button>
-
-                            <button
-                                className={classNames(styles.button, styles.exportToXls)}
-                                onClick={() => exportToExcel(reviewsStore.filteredReviews)}
+                            <button className={classNames(styles.tab, styles.tabGreen, {
+                                [styles.active]: tasksStore.statusFilter === "archive"
+                            })}
+                                    onClick={() => tasksStore.statusFilter = "archive"}
                             >
-                                Экспорт в XLS
+                                <img src={taskArchiveBlack}/>
+                                Архив
                             </button>
 
                             <div className={styles.sort}>
                                 <Sort
                                     options={sortOptions}
-                                    value={reviewsStore.sortOptionValue}
-                                    onChange={value => reviewsStore.sortOptionValue = value}
+                                    value={tasksStore.sortOptionValue}
+                                    onChange={value => tasksStore.sortOptionValue = value}
                                 />
                             </div>
                         </div>
 
                         <div className={styles.list}>
-                            {reviewsStore.filteredReviews?.map(r =>
+                            {tasksStore.filteredTasks?.length === 0 &&
+                                <div className={styles.noResults}>
+                                    Не найдено задач с таким фильтром
+                                </div>
+                            }
+                            {tasksStore.filteredTasks?.map(t =>
                                 <button className={styles.listItem}
-                                    onClick={() => navigate(`/reviews/${r.id}`)}
+                                    onClick={() => navigate(`/tasks/${t.id}`)}
                                 >
                                     <div
                                         className={styles.rating}
-                                        style={{backgroundColor: getRatingColor(r.rating)}}
+                                        //style={{backgroundColor: getRatingColor(r.status)}}
                                     >
-                                        {r.rating}
+                                        {t.status === "open" &&
+                                            <img src={taskOpen}/>
+                                        }
+                                        {t.status === "in_progress" &&
+                                            <img src={taskInProgress}/>
+                                        }
+                                        {t.status === "archive" &&
+                                            <img src={taskArchive}/>
+                                        }
                                     </div>
                                     <div className={styles.info}>
-                                        <div className={styles.categories}>
-                                            {r.categories.map(c =>
-                                                <div className={styles.category}>
-                                                    {c}
-                                                </div>
-                                            )}
-                                            {r.categories.length === 0 &&
-                                                <div className={styles.category}>
-                                                    Категории не определены
-                                                </div>
-                                            }
+                                        <div className={styles.category}>
+                                            {t.name}
                                         </div>
                                         <div className={styles.address}>
-                                            {r.postamat_address.replaceAll("/n", "")}
+                                            {t.review.postamat_address.replaceAll("/n", "")}
                                         </div>
                                     </div>
                                     <div className={styles.right}>
                                         <div className={styles.id}>
-                                            №{r.id}
+                                            {t.id}
                                         </div>
                                         <div className={styles.date}>
-                                            {r.date}
+                                            {t.created_at}
                                         </div>
                                     </div>
                                 </button>
@@ -276,7 +245,7 @@ export const TaskListPage = observer(() => {
 
     if (isFilterOpen) {
         return (
-            <FilterReviews
+            <FilterTasks
                 onClose={() => setIsFilterOpen(false)}
             />
         )

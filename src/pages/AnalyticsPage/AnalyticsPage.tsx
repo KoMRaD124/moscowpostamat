@@ -168,7 +168,7 @@ export const AnalyticsPage = observer(() => {
                         >
                             <Tooltip/>
                             <CartesianGrid strokeDasharray="3 3"/>
-                            <XAxis dataKey="period" padding={{left: 20, right: 20}}/>
+                            <XAxis dataKey="period" padding={{left: 10, right: 20}}/>
                             <YAxis domain={[1, 5]} padding={{top: 20}}/>
                             <Line
                                 type="monotone"

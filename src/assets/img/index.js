@@ -23,8 +23,20 @@ import arrowUp from "./arrowUp.svg"
 import postamats from "./Postamats.svg"
 import filter from "./filter.svg"
 import sort from "./Sort.svg"
+import taskOpen from "./task/taskOpen.svg"
+import taskInProgress from "./task/taskInProgress.svg"
+import taskArchive from "./task/taskArchive.svg"
+import taskOpenBlack from "./task/taskOpenBlack.svg"
+import taskInProgressBlack from "./task/taskInProgressBlack.svg"
+import taskArchiveBlack from "./task/taskArchiveBlack.svg"
 
 export {
+    taskOpenBlack,
+    taskInProgressBlack,
+    taskArchiveBlack,
+    taskOpen,
+    taskInProgress,
+    taskArchive,
     sort,
     filter,
     loaderWhiteSvg,
