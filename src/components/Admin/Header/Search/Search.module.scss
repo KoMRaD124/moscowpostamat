@@ -3,7 +3,7 @@
   border-radius: 8px;
   background-color: #e2e7ee;
   padding: 14px 24px;
-  width: 700px;
+  width: 636px;
   font-family: "TT Firs Neue";
   font-style: normal;
   font-weight: 400;
@@ -31,6 +31,9 @@
   &:hover{
     background: #F06071;
     cursor: pointer;
+  }
+  &:disabled{
+    background: #A0A0A0;;
   }
 
 }

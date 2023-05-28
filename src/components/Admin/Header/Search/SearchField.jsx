@@ -5,11 +5,9 @@ import axios from "axios";
 import { domain } from "../../../../constants/config";
 import { observer } from "mobx-react-lite";
 import { searchStore } from "../../../../mobxStore/store";
-import { SearchResult } from "./SearchResult/SearchResult";
 import { useNavigate } from "react-router-dom";
 
 export const SearchField = observer(() => {
-  /* const [isActive, setIsActive] = React.useState(true); */
   const navigate= useNavigate()
   const [searchValue, setSearchValue] = React.useState("");
   const searchFetch = () => {
@@ -17,7 +15,7 @@ export const SearchField = observer(() => {
       .get(`${domain}/api/admin/reviews?search=${searchValue}`)
       .then((response) => {
         searchStore.reviews = response.data;
-        navigate("/search", { replace: true });
+        navigate("/search");
         setSearchValue("")
         searchStore.setIsActive(true)
         
@@ -31,8 +29,7 @@ export const SearchField = observer(() => {
       .then((response) => {
         searchStore.tasks = response.data;
         setSearchValue("")
-
-        navigate("/search", { replace: true });
+        navigate("/search", {replace:true});
         searchStore.setIsActive(true)
       })
 

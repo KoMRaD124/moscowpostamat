@@ -23,7 +23,7 @@ function App() {
         /* navigate("/*"); */
       })
       .catch((error) => {
-        navigate("/login", { replace: true });
+        navigate("/login");
         console.log("ауф запрос "+error);
       });
   }, []);

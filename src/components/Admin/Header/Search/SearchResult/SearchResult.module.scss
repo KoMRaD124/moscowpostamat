@@ -1,8 +1,9 @@
 @import "src/styles/vars";
 .body {
   background-color: $color-white;
-  height: 100vh;
+  min-height: 100vh;
   padding: 0 40px;
+  padding-bottom: 40px;
 }
 .divider {
   margin-top: 28px;
