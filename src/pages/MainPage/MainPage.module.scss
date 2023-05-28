@@ -67,20 +67,20 @@
 .ratingBad {
   color: $color-red;
   background-color: $color-white-hover;
-  border: 3px solid #F06071;
-  box-shadow: 0px 0px 8px #F7C1C1;
+  border: 3px solid #f06071;
+  box-shadow: 0px 0px 8px #f7c1c1;
 }
 .ratingNormal {
-  color: #F0BC00;
-  background-color: #FBF4DD;
-  border: 3px solid #FFE586;
-  box-shadow: 0px 0px 8px #F3F09F;
+  color: #f0bc00;
+  background-color: #fbf4dd;
+  border: 3px solid #ffe586;
+  box-shadow: 0px 0px 8px #f3f09f;
 }
 .ratingGood {
   color: #00b333;
   background-color: #dff9ee;
   border: 3px solid #30ff6b;
-  box-shadow: 0px 0px 8px #9FF3CF;
+  box-shadow: 0px 0px 8px #9ff3cf;
 }
 .ratingText {
   display: flex;
@@ -114,7 +114,7 @@
     color: #525971;
   }
 }
-.dataButtonWeek{
+.dataButtonWeek {
   padding: 4px 16px;
   border-radius: 4px;
   font-family: "TT Firs Neue";
@@ -129,9 +129,9 @@
     color: #525971;
   }
 }
-.dataButtonActive{
+.dataButtonActive {
   background: #d5dde9;
-  color: #2F3342;
+  color: #2f3342;
 }
 .averageShowAll {
   width: 100%;
@@ -147,7 +147,7 @@
   margin-top: 106px;
   letter-spacing: 0.01em;
   color: $color-black-nonactive;
-  &:hover{
+  &:hover {
     color: $color-black;
   }
 }
@@ -165,14 +165,12 @@
   margin-top: 34px;
   letter-spacing: 0.01em;
   color: $color-black-nonactive;
-  &:hover{
+  &:hover {
     color: $color-black;
   }
 }
 .arrowTaskActive * {
- 
-    fill: #F73619;
-
+  fill: #f73619;
 }
 .taskInProgress {
   padding-left: 24px;
@@ -204,4 +202,14 @@
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+}
+.loading {
+  font-family: "TT Firs Neue";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 41px;
+  letter-spacing: 0.01em;
+  color: #2f3342;
+  margin: 40px;
 }

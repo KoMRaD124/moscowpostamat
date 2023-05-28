@@ -214,4 +214,9 @@ export const MainPage = () => {
       </div>
     );
   }
+  else{
+    return(
+      <div className={styles.loading}>Загрузка...</div>
+    )
+  }
 };
