@@ -32,4 +32,7 @@
     background: #F06071;
     cursor: pointer;
   }
+  &:disabled{
+    background: #A0A0A0;;
+  }
 }
