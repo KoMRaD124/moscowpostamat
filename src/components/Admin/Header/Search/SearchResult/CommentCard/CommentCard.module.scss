@@ -12,7 +12,6 @@
 .rating {
   width: 50px;
   height: 75px;
-  background: #00b333;
   border-radius: 8px 0px 8px 8px;
   margin-left: 1px;
   margin-top: 1px;
@@ -25,6 +24,15 @@
   font-size: 18px;
   line-height: 120%;
   color: $color-white;
+}
+.ratingBad {
+  background: #f73619;
+}
+.ratingNormal {
+  background: #f0bc00;
+}
+.ratingGood {
+  background: #00b333;
 }
 .type {
   border: 1px solid #2f3342;
@@ -78,4 +86,16 @@
   background: $color-black;
   color: $color-white;
   border-radius: 4px;
+}
+.date {
+  font-family: "TT Firs Neue";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 19px;
+  letter-spacing: 0.01em;
+
+  /* Дефолтные, фоновые/Чёрный/Неактивный чёрный */
+
+  color: #9da1ae;
 }

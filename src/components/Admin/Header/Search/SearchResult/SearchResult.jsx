@@ -32,10 +32,10 @@ export const SearchResult = observer(() => {
         {reviewsArray.map((el) => (
           <CommentCard
             id={el.id}
-            address={el.address}
+            address={el.postamat_address}
             rating={el.rating}
-            types={el.category_ids}
-            date={el.date.substr(0, 5)}
+            types={el.categories}
+            date={el.date}
           />
         ))}
       </div>
@@ -49,9 +49,10 @@ export const SearchResult = observer(() => {
           <SearchTaskCard
             category={el.name}
             key={el.id}
-            id={el.id}
-            date={el.updated_at}
-            address={el.review.address}
+            id={el.review.id}
+            date={el.created_at}
+            address={el.review.postamat_address
+            }
           />
         ))}
       </div>

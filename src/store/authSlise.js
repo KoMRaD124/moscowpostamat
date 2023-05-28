@@ -18,9 +18,7 @@ const authSlise=createSlice({
             state.auth.name=action.payload.name
             state.auth.role=action.payload.role
             state.auth.isAuthenticated=true
-            console.log("привет из стора");
-            console.log(state.auth.role)
-            console.log("привет из стора");
+           
         },
         logOutUser(state){
             state.auth.id=null

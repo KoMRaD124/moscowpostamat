@@ -21,6 +21,7 @@ code {
 body {
   overflow: overlay;
   background: white !important;
+  color: #2f3342;
 }
 
 a {
