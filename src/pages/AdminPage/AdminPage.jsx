@@ -11,6 +11,7 @@ import { SearchResult } from "../../components/Admin/Header/Search/SearchResult/
 import { arrowUp } from "../../assets/img";
 import {ReviewPage} from "../ReviewPage/ReviewPage";
 import {TaskPage} from "../TaskPage/TaskPage";
+import { LoadData } from "../../components/Admin/Access/AccessScreens/Modal/LoadData";
 
 export const AdminPage = observer(() => {
   const scrollToTop = React.useRef(null);
@@ -49,6 +50,7 @@ export const AdminPage = observer(() => {
             <Route path={"/tasks/:id"} element={<TaskPage/>} />
           </Routes>
         </div>
+
       </div>
     </>
   );

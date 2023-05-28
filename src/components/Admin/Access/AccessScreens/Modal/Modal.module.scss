@@ -25,7 +25,7 @@
   border-radius: 16px;
   opacity: 1;
 }
-.containerSmall{
+.containerSmall {
   /* padding-top: 12px; */
   padding-left: 28px;
   padding-right: 28px;
@@ -38,6 +38,9 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+}
+.containerLoad {
+  padding: 28px 48px;
 }
 .header {
   font-family: "TT Firs Neue";
@@ -82,7 +85,7 @@
     border-radius: 27px;
   }
 }
-.containerButtonSmall{
+.containerButtonSmall {
   display: flex;
   align-items: center;
   justify-content: center;
