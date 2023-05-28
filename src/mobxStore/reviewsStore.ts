@@ -53,6 +53,10 @@ class ReviewsStore {
     searchValue = ""
     sortOptionValue = sortOptions[0].value
 
+    getReviewById(id: number) {
+        return this.reviews?.find(r => r.id === id)
+    }
+
     isCategorySelected(id: number) {
         return this.selectedCategoryIds.includes(id)
     }
@@ -104,7 +108,7 @@ class ReviewsStore {
         return sources.find(c => c.id === id)
     }
 
-    get filteredRevies() {
+    get filteredReviews() {
         if (this.selectedReview) {
             return [this.selectedReview]
         }
@@ -143,14 +147,14 @@ class ReviewsStore {
     }
 
     async fetchReviews() {
-        let q = `${domain}/api/admin/reviews?`;
+        let q = `${domain}/api/admin/reviews?limit=100`;
 
         if (this.ratingFilter === "5-4") {
-            q += `min_rating=4&max_rating=5`
+            q += `&min_rating=4&max_rating=5`
         } else if (this.ratingFilter === "3") {
-            q += `rating=3`
+            q += `&rating=3`
         } else if (this.ratingFilter === "2-1") {
-            q += `min_rating=1&max_rating=2`
+            q += `&min_rating=1&max_rating=2`
         }
 
         if (this.selectedCategoryIds.length) {

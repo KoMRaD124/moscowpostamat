@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {observer} from "mobx-react-lite";
-import styles from "./ReviewListPage.module.scss"
+import styles from "./TaskListPage.module.scss"
 import chevronIcon from "../../assets/img/select/chevron.svg"
 import {postamatStore} from "../../mobxStore/postamatStore";
 import xMark from "../../assets/img/Xmark.svg";
@@ -24,7 +24,7 @@ function exportToExcel(jsonData: any) {
     XLSX.writeFile(workbook, 'Отзывы.xlsx');
 }
 
-export const ReviewListPage = observer(() => {
+export const TaskListPage = observer(() => {
     const navigate = useNavigate()
 
     useEffect(() => {

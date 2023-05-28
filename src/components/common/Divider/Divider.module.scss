@@ -2,6 +2,8 @@
 .divider{
     /* margin: 0 40px; */
     width: 100%;
-    height: 2px;
-    background-color: $color-black-nonactive;
+    height: 0;
+    opacity: 0.5;
+    border-bottom: 2px solid $color-black-nonactive;
+    max-width: 960px;
 }

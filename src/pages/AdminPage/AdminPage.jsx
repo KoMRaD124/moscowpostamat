@@ -9,6 +9,7 @@ import { observer } from "mobx-react-lite";
 import { searchStore } from "../../mobxStore/store";
 import { SearchResult } from "../../components/Admin/Header/Search/SearchResult/SearchResult";
 import { arrowUp } from "../../assets/img";
+import {CommentCardPage} from "../CommentCardPage/CommentCardPage";
 
 export const AdminPage = observer(() => {
   const scrollToTop = React.useRef(null);
@@ -42,6 +43,8 @@ export const AdminPage = observer(() => {
             ))}
 
             <Route path="/search" element={<SearchResult />} />
+
+            <Route path={"/reviews/:id"} element={<CommentCardPage/>} />
           </Routes>
         </div>
       </div>

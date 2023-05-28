@@ -192,7 +192,7 @@ export const AnalyticsPage = observer(() => {
         return (
             <div className={styles.fullWidthRow}>
                 <div className={styles.cardHeader}>
-                    Количество применённых тэгов
+                    Количество применённых категорий
                 </div>
                 <div className={styles.reviewCategoriesCard}>
                     <div>

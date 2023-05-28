@@ -1,10 +1,9 @@
 @import "src/styles/vars";
 .body {
-  margin: 0 40px;
+  padding: 40px;
 }
 .header {
   display: flex;
-  margin-top: 40px;
   margin-bottom: 20px;
   align-items: center;
 }
@@ -315,6 +314,14 @@
   border: 1px solid #2f3342;
   border-radius: 4px;
   padding: 4px 8px;
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  text-transform: lowercase;
+  color: #2F3342;
 }
 .taskHead {
   font-family: "TT Firs Neue";
